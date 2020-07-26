@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdkVersion(ProjectConfig.compileSdk)
 
     defaultConfig {
         applicationId = "zj.app.taipeizootour"
-        minSdkVersion(23)
-        targetSdkVersion(30)
+        minSdkVersion(ProjectConfig.minSdk)
+        targetSdkVersion(ProjectConfig.targetSdk)
         versionCode = 1
         versionName = "1.0"
 
@@ -27,7 +27,7 @@ android {
 
 dependencies {
     implementation(fileTree( mapOf("dir" to "libs", "include" to listOf("*.jar")) ))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.3.72")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${ProjectConfig.kotlinVersion}")
     implementation("androidx.core:core-ktx:1.3.1")
     implementation("androidx.appcompat:appcompat:1.1.0")
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
