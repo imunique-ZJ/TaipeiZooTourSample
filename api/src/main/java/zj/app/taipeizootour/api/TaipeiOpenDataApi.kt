@@ -13,6 +13,7 @@ object TaipeiOpenDataApi: ITaipeiOpenDataApi {
 
     private val openDataService = Retrofit.Builder()
         .baseUrl("https://data.taipei/api/")
+        .addCallAdapterFactory(CallAdapterFactory())
         .addConverterFactory(JacksonConverterFactory.create(ObjectMapper().registerKotlinModule()))
         .build()
         .create(ITaipeiOpenDataService::class.java)
