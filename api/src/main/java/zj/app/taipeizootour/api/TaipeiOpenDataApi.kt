@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 import zj.app.taipeizootour.api.data.DataSetMetadata
 import zj.app.taipeizootour.api.data.ApiResponse
+import zj.app.taipeizootour.api.data.csv.AreaIntro
 import zj.app.taipeizootour.api.data.Response
 
 object TaipeiOpenDataApi: ITaipeiOpenDataApi {
@@ -22,6 +23,12 @@ object TaipeiOpenDataApi: ITaipeiOpenDataApi {
     override suspend fun getMeta(query: String): ApiResponse<Response<DataSetMetadata>>? {
         return withContext(Dispatchers.IO) {
             openDataService.getMeta(query)
+        }
+    }
+
+    override suspend fun getCsv(id: String, rid: String): ApiResponse<List<AreaIntro>?>? {
+        return withContext(Dispatchers.IO) {
+            openDataService.getCsv(id, rid)
         }
     }
 }
