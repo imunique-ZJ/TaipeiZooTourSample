@@ -11,6 +11,7 @@ import zj.app.taipeizootour.api.data.DataSetMetadata
 import zj.app.taipeizootour.api.data.ApiResponse
 import zj.app.taipeizootour.api.data.csv.AreaIntro
 import zj.app.taipeizootour.api.data.Response
+import zj.app.taipeizootour.api.data.json.Plant
 
 object TaipeiOpenDataApi: ITaipeiOpenDataApi {
 
@@ -31,6 +32,12 @@ object TaipeiOpenDataApi: ITaipeiOpenDataApi {
     override suspend fun getCsv(id: String, rid: String): ApiResponse<List<AreaIntro>?>? {
         return withContext(Dispatchers.IO) {
             openDataService.getCsv(id, rid)
+        }
+    }
+
+    override suspend fun getPlantsJson(id: String, offset: Int, limit: Int): ApiResponse<Response<Plant>>? {
+        return withContext(Dispatchers.IO) {
+            openDataService.getPlantsJson(id, offset, limit)
         }
     }
 }
