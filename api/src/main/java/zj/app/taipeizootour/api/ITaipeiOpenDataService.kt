@@ -15,7 +15,8 @@ interface ITaipeiOpenDataService {
     suspend fun getMeta(@Query("q") query: String): ApiResponse<Response<DataSetMetadata>>?
 
     @GET("getDatasetInfo/downloadResource")
-    suspend fun getCsv(@Query("id") id: String, @Query("rid") rid: String): ApiResponse<List<AreaIntro>?>?
+    suspend fun getAreaIntroCsv(@Query("id") id: String,
+                                @Query("rid") rid: String): ApiResponse<List<AreaIntro>?>?
 
     @GET("v1/dataset/{rid}?scope=resourceAquire")
     suspend fun getPlantsJson(@Path("rid") rid: String,

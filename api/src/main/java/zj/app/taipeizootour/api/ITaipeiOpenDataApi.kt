@@ -9,7 +9,7 @@ import zj.app.taipeizootour.api.data.json.Plant
 interface ITaipeiOpenDataApi {
 
     suspend fun getMeta(query: String): ApiResponse<Response<DataSetMetadata>>?
-    suspend fun getCsv(id: String, rid: String): ApiResponse<List<AreaIntro>?>?
+    suspend fun getAreaIntroCsv(id: String, rid: String): ApiResponse<List<AreaIntro>?>?
     suspend fun getPlantsJson(id: String, offset: Int = 0, limit: Int = 1000): ApiResponse<Response<Plant>>?
 
 }

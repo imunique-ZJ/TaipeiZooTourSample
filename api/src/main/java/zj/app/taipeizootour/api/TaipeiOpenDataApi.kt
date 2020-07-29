@@ -29,9 +29,9 @@ object TaipeiOpenDataApi: ITaipeiOpenDataApi {
         }
     }
 
-    override suspend fun getCsv(id: String, rid: String): ApiResponse<List<AreaIntro>?>? {
+    override suspend fun getAreaIntroCsv(id: String, rid: String): ApiResponse<List<AreaIntro>?>? {
         return withContext(Dispatchers.IO) {
-            openDataService.getCsv(id, rid)
+            openDataService.getAreaIntroCsv(id, rid)
         }
     }
 
