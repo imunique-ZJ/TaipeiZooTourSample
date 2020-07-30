@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import zj.app.taipeizootour.db.dao.ZooAreaDao
+import zj.app.taipeizootour.db.dao.ZooPlantDao
 import zj.app.taipeizootour.db.model.ZooArea
 import zj.app.taipeizootour.db.model.ZooPlant
 
@@ -12,6 +13,7 @@ import zj.app.taipeizootour.db.model.ZooPlant
 abstract class ZooDatabase: RoomDatabase() {
 
     abstract fun zooAreaDao(): ZooAreaDao
+    abstract fun zooPlantDao(): ZooPlantDao
 
     companion object {
         @Volatile
