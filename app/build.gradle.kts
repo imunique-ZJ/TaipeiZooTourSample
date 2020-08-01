@@ -29,6 +29,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":api"))
+    implementation(project(":db"))
+
     implementation(fileTree( mapOf("dir" to "libs", "include" to listOf("*.jar")) ))
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${ProjectConfig.kotlinVersion}")
     implementation("androidx.core:core-ktx:1.3.1")
