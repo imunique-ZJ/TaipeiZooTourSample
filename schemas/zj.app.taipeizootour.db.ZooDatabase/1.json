@@ -2,28 +2,16 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "9271987d6b02b81c7630b5ece64cc4c0",
+    "identityHash": "e807c5d325b37128ccf107cc5e92213d",
     "entities": [
       {
         "tableName": "ZooArea",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`areaId` TEXT NOT NULL, `title` TEXT NOT NULL, `type` TEXT NOT NULL, `category` TEXT NOT NULL, `metadataModified` TEXT NOT NULL, `issued` TEXT NOT NULL, `numberOfData` INTEGER NOT NULL, `orgId` TEXT NOT NULL, `orgName` TEXT NOT NULL, `organizationName` TEXT NOT NULL, `subOrgId` TEXT NOT NULL, `subOrgName` TEXT NOT NULL, `tag` TEXT NOT NULL, PRIMARY KEY(`areaId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`areaId` INTEGER NOT NULL, `category` TEXT NOT NULL, `name` TEXT NOT NULL, `picUrl` TEXT NOT NULL, `info` TEXT NOT NULL, `memo` TEXT NOT NULL, `latLng` TEXT NOT NULL, `introUrl` TEXT NOT NULL, PRIMARY KEY(`areaId`))",
         "fields": [
           {
             "fieldPath": "areaId",
             "columnName": "areaId",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "title",
-            "columnName": "title",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "type",
-            "columnName": "type",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -33,56 +21,38 @@
             "notNull": true
           },
           {
-            "fieldPath": "metadataModified",
-            "columnName": "metadataModified",
+            "fieldPath": "name",
+            "columnName": "name",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "issued",
-            "columnName": "issued",
+            "fieldPath": "picUrl",
+            "columnName": "picUrl",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "numberOfData",
-            "columnName": "numberOfData",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "orgId",
-            "columnName": "orgId",
+            "fieldPath": "info",
+            "columnName": "info",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "orgName",
-            "columnName": "orgName",
+            "fieldPath": "memo",
+            "columnName": "memo",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "organizationName",
-            "columnName": "organizationName",
+            "fieldPath": "latLng",
+            "columnName": "latLng",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "subOrgId",
-            "columnName": "subOrgId",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "subOrgName",
-            "columnName": "subOrgName",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "tag",
-            "columnName": "tag",
+            "fieldPath": "introUrl",
+            "columnName": "introUrl",
             "affinity": "TEXT",
             "notNull": true
           }
@@ -273,7 +243,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9271987d6b02b81c7630b5ece64cc4c0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e807c5d325b37128ccf107cc5e92213d')"
     ]
   }
 }

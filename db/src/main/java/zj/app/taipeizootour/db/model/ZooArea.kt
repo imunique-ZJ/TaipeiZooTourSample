@@ -6,17 +6,12 @@ import androidx.room.PrimaryKey
 @Entity
 data class ZooArea(
     @PrimaryKey
-    val areaId: String,
-    val title: String,
-    val type: String,
+    val areaId: Int,
     val category: String,
-    val metadataModified: String,
-    val issued: String,
-    val numberOfData: Int,
-    val orgId: String,
-    val orgName: String,
-    val organizationName: String,
-    val subOrgId: String,
-    val subOrgName: String,
-    val tag: String
+    val name: String,
+    val picUrl: String,
+    val info: String,
+    val memo: String,
+    val latLng: String,
+    val introUrl: String
 )
