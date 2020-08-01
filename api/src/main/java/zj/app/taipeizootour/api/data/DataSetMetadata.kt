@@ -18,5 +18,16 @@ data class DataSetMetadata(
     val organizationName: String,
     val subOrgId: String,
     val subOrgName: String,
-    val tag: String
+    val tag: String,
+    val resources: List<Resource>
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class Resource(
+    val resourceId: String,
+    val resourceName: String,
+    val resourceDescription: String?,
+    val resourceUpdate: String,
+    val resourceEncoding: String,
+    val format: String
 )
