@@ -34,11 +34,17 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_end="8dp"/>
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivAreaPic"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/ic_baseline_pets_24"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="4dp"
+        android:scaleType="centerCrop"
+        android:elevation="6dp"
+        app:strokeColor="@android:color/white"
+        app:strokeWidth="8dp"
+        app:shapeAppearanceOverlay="@style/circleImage"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintLeft_toLeftOf="@id/guideStart"
         app:layout_constraintTop_toTopOf="@id/guideTop"
         app:layout_constraintBottom_toBottomOf="@id/guideBottom"/>
