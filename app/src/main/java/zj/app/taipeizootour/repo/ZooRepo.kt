@@ -23,8 +23,8 @@ class ZooRepo(
         return zooAreaDao.queryAll()
     }
 
-    override fun getLiveAreaPlants(): LiveData<List<AreaWithPlants>> {
-        return areaPlantsDao.queryAll()
+    override suspend fun getAreaPlants(areaId: Int): AreaWithPlants? {
+        return areaPlantsDao.queryByArea(areaId)
     }
 
     override suspend fun fetchMeta(query: String): DataSetMetadata? {

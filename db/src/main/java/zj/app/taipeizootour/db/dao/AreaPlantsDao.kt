@@ -14,7 +14,7 @@ interface AreaPlantsDao {
 
     @Transaction
     @Query("SELECT * FROM ZooArea WHERE areaId = :areaId")
-    fun queryByArea(areaId: Int): LiveData<List<AreaWithPlants>>
+    suspend fun queryByArea(areaId: Int): AreaWithPlants?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(joins: List<AreaPlantsCrossRef>)

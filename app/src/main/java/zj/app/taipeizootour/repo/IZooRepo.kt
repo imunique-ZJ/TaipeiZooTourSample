@@ -8,8 +8,7 @@ import zj.app.taipeizootour.db.model.ZooArea
 interface IZooRepo {
 
     fun getLiveArea(): LiveData<List<ZooArea>>
-    fun getLiveAreaPlants(): LiveData<List<AreaWithPlants>>
-
+    suspend fun getAreaPlants(areaId: Int): AreaWithPlants?
     suspend fun fetchMeta(query: String): DataSetMetadata?
     suspend fun fetchAreaIntro(id: String, rid: String)
     suspend fun fetchPlants(id: String)
