@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class ZooArea(
     @PrimaryKey
-    val id: String,
+    val areaId: String,
     val title: String,
     val type: String,
     val category: String,

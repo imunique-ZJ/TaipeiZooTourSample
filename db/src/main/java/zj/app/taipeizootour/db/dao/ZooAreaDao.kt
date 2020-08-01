@@ -9,7 +9,7 @@ import zj.app.taipeizootour.db.model.ZooArea
 
 @Dao
 interface ZooAreaDao {
-    @Query("SELECT * FROM ZooArea ORDER BY id ASC")
+    @Query("SELECT * FROM ZooArea ORDER BY areaId ASC")
     fun queryAll(): LiveData<List<ZooArea>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
