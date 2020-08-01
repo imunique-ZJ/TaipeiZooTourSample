@@ -12,6 +12,9 @@ interface ZooAreaDao {
     @Query("SELECT * FROM ZooArea ORDER BY areaId ASC")
     fun queryAll(): LiveData<List<ZooArea>>
 
+    @Query("SELECT * FROM ZooArea WHERE name = :name ORDER BY name ASC LIMIT 1")
+    suspend fun queryByName(name: String): ZooArea?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(zooAreas: List<ZooArea>)
 
