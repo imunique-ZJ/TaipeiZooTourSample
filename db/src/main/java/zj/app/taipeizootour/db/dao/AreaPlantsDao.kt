@@ -18,5 +18,5 @@ interface AreaPlantsDao {
     fun queryByArea(areaId: Int): LiveData<List<AreaWithPlants>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(join: AreaPlantsCrossRef)
+    suspend fun insert(joins: List<AreaPlantsCrossRef>)
 }
