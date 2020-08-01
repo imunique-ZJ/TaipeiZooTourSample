@@ -38,7 +38,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.3.1")
     implementation("androidx.appcompat:appcompat:1.1.0")
 
-    implementation("androidx.room:room-runtime:${Dependency.roomVersion}")
+    api("androidx.room:room-runtime:${Dependency.roomVersion}")
     kapt("androidx.room:room-compiler:${Dependency.roomVersion}")
 
     // optional - Kotlin Extensions and Coroutines support for Room
