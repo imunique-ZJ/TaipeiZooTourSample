@@ -39,6 +39,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.2.5")
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
     implementation("com.google.android.material:material:1.1.0")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
     // RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.2.0-alpha05")
