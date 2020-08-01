@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import coil.size.Scale
 import zj.app.taipeizootour.R
-import zj.app.taipeizootour.databinding.ItemZooAreaBinding
+import zj.app.taipeizootour.databinding.LayoutZooRecyclerviewItemBinding
 import zj.app.taipeizootour.db.model.ZooArea
 
 class ZooAreaAdapter(private val onClick: OnAreaClick): ListAdapter<ZooArea, ZooAreaAdapter.ZooAreaViewHolder>(diffCallback) {
@@ -30,7 +30,7 @@ class ZooAreaAdapter(private val onClick: OnAreaClick): ListAdapter<ZooArea, Zoo
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ZooAreaViewHolder {
-        val vb = ItemZooAreaBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val vb = LayoutZooRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ZooAreaViewHolder(vb, onClick)
     }
 
@@ -38,17 +38,17 @@ class ZooAreaAdapter(private val onClick: OnAreaClick): ListAdapter<ZooArea, Zoo
         holder.bind(getItem(position))
     }
 
-    inner class ZooAreaViewHolder(private val vb: ItemZooAreaBinding,
+    inner class ZooAreaViewHolder(private val vb: LayoutZooRecyclerviewItemBinding,
                                   private val onClick: OnAreaClick): RecyclerView.ViewHolder(vb.root) {
 
         fun bind(zooArea: ZooArea) {
-            vb.ivAreaPic.load(zooArea.picUrl) {
+            vb.ivPic.load(zooArea.picUrl) {
                 placeholder(R.drawable.ic_baseline_pets_24)
                 scale(Scale.FILL)
             }
-            vb.tvAreaName.text = zooArea.name
-            vb.tvAreaDesc.text = zooArea.info
-            vb.tvAreaMemo.text = zooArea.memo
+            vb.tvTitle.text = zooArea.name
+            vb.tvDesc.text = zooArea.info
+            vb.tvMemo.text = zooArea.memo
 
             vb.root.setOnClickListener {
                 onClick.onClick(zooArea)

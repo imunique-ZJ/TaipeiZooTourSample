@@ -35,7 +35,7 @@
         app:layout_constraintGuide_end="8dp"/>
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/ivAreaPic"
+        android:id="@+id/ivPic"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="4dp"
@@ -50,32 +50,32 @@
         app:layout_constraintBottom_toBottomOf="@id/guideBottom"/>
 
     <TextView
-        android:id="@+id/tvAreaName"
+        android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:textColor="?android:textColorTertiary"
         style="@style/TextAppearance.MaterialComponents.Headline6"
-        app:layout_constraintLeft_toRightOf="@id/ivAreaPic"
+        app:layout_constraintLeft_toRightOf="@id/ivPic"
         app:layout_constraintTop_toTopOf="@id/guideTop"
         android:scrollbarTrackHorizontal="@id/guideEnd"
         tools:text="蝸牛館"/>
 
     <TextView
-        android:id="@+id/tvAreaDesc"
+        android:id="@+id/tvDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="2"
         android:ellipsize="end"
         android:textColor="?android:textColorTertiary"
         style="@style/TextAppearance.MaterialComponents.Body2"
-        app:layout_constraintLeft_toLeftOf="@id/tvAreaName"
-        app:layout_constraintTop_toBottomOf="@id/tvAreaName"
+        app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
         app:layout_constraintRight_toRightOf="@id/guideEnd"
         tools:text="蝸牛蝸牛蝸牛蝸牛蝸牛蝸牛蝸牛蝸牛蝸牛蝸牛蝸牛"/>
 
     <TextView
-        android:id="@+id/tvAreaMemo"
+        android:id="@+id/tvMemo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -83,8 +83,8 @@
         android:ellipsize="end"
         android:textColor="?android:textColorTertiary"
         style="@style/TextAppearance.MaterialComponents.Body2"
-        app:layout_constraintLeft_toLeftOf="@id/tvAreaName"
-        app:layout_constraintTop_toBottomOf="@id/tvAreaDesc"
+        app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvDesc"
         app:layout_constraintBottom_toBottomOf="@id/guideBottom"
         tools:text="沒事多休息，多休息沒事"/>
 

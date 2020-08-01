@@ -19,7 +19,7 @@
             android:id="@+id/rvZooAreas"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_zoo_area"
+            tools:listitem="@layout/layout_zoo_recyclerview_item"
             tools:itemCount="20"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
