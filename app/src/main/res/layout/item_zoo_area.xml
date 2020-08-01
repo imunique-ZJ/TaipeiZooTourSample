@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideStart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideEnd"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideTop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="8dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideBottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="8dp"/>
+
+    <ImageView
+        android:id="@+id/ivAreaPic"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_baseline_pets_24"
+        app:layout_constraintLeft_toLeftOf="@id/guideStart"
+        app:layout_constraintTop_toTopOf="@id/guideTop"
+        app:layout_constraintBottom_toBottomOf="@id/guideBottom"/>
+
+    <TextView
+        android:id="@+id/tvAreaName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:textColor="?android:textColorTertiary"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        app:layout_constraintLeft_toRightOf="@id/ivAreaPic"
+        app:layout_constraintTop_toTopOf="@id/guideTop"
+        android:scrollbarTrackHorizontal="@id/guideEnd"
+        tools:text="蝸牛館"/>
+
+    <TextView
+        android:id="@+id/tvAreaDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="?android:textColorTertiary"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        app:layout_constraintLeft_toLeftOf="@id/tvAreaName"
+        app:layout_constraintTop_toBottomOf="@id/tvAreaName"
+        app:layout_constraintRight_toRightOf="@id/guideEnd"
+        tools:text="蝸牛蝸牛蝸牛蝸牛蝸牛蝸牛蝸牛蝸牛蝸牛蝸牛蝸牛"/>
+
+    <TextView
+        android:id="@+id/tvAreaMemo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="?android:textColorTertiary"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        app:layout_constraintLeft_toLeftOf="@id/tvAreaName"
+        app:layout_constraintTop_toBottomOf="@id/tvAreaDesc"
+        app:layout_constraintBottom_toBottomOf="@id/guideBottom"
+        tools:text="沒事多休息，多休息沒事"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

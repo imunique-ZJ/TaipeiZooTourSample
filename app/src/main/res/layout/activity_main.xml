@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -27,6 +27,7 @@
         android:id="@+id/fragmentZooAreas"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:name="zj.app.taipeizootour.ui.ZooAreaFragment"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbar"
         app:layout_constraintRight_toRightOf="parent"

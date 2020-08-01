@@ -1,4 +1,4 @@
-package zj.app.taipeizootour
+package zj.app.taipeizootour.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
