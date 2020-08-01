@@ -13,6 +13,7 @@ import zj.app.taipeizootour.R
 import zj.app.taipeizootour.adapter.ZooAreaAdapter
 import zj.app.taipeizootour.databinding.FragmentZooAreaBinding
 import zj.app.taipeizootour.db.model.ZooArea
+import zj.app.taipeizootour.ext.dpToPx
 import zj.app.taipeizootour.state.ZooAreaState
 import zj.app.taipeizootour.viewmodel.MainActivityViewModel
 
@@ -63,6 +64,7 @@ class ZooAreaFragment: Fragment() {
     private fun setupRecyclerView() {
         vb.rvZooAreas.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         vb.rvZooAreas.adapter = zooAreaAdapter
+        vb.rvZooAreas.addItemDecoration(SpaceItemDecoration(4.dpToPx()))
     }
 
     private fun bindLiveData() {
