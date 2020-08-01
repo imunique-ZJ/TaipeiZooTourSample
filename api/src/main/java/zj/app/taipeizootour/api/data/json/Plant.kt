@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Plant(
+    @JsonProperty("_id")
+    val id: Int,
+
     @JsonProperty("F_Name_Latin")
     val latinName: String,
 
