@@ -1,5 +1,6 @@
 package zj.app.taipeizootour.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +26,12 @@ class ZooAreaFragment: Fragment() {
     private val vm: MainActivityViewModel by activityViewModels()
     private val zooAreaAdapter by lazy {
         ZooAreaAdapter(object: ZooAreaAdapter.OnAreaClick {
-            override fun onClick(area: ZooArea) {}
+            override fun onClick(area: ZooArea) {
+                val intent = Intent(requireActivity(), DetailActivity::class.java).apply {
+                    putExtra(DetailActivity.INTENT_KEY_AREA_ID, area.areaId)
+                }
+                startActivity(intent)
+            }
         })
     }
 
