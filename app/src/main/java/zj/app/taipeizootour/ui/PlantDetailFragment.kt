@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.SharedElementCallback
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -13,7 +15,8 @@ import zj.app.taipeizootour.adapter.PlantPictureAdapter
 import zj.app.taipeizootour.databinding.FragmentPlantDetailBinding
 import zj.app.taipeizootour.viewmodel.DetailActivityViewModel
 
-class PlantDetailFragment: Fragment() {
+
+class PlantDetailFragment : Fragment() {
 
     private var _vb: FragmentPlantDetailBinding? = null
     private val vb get() = _vb!!
@@ -25,6 +28,10 @@ class PlantDetailFragment: Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         _vb = FragmentPlantDetailBinding.inflate(layoutInflater, container, false)
+        prepareSharedElementTransition()
+        if (savedInstanceState == null) {
+            postponeEnterTransition();
+        }
         return vb.root
     }
 
@@ -38,6 +45,18 @@ class PlantDetailFragment: Fragment() {
         super.onDestroyView()
         plantPicsAdapter.unregisterAdapterDataObserver(pagerIndicator.adapterDataObserver)
         _vb = null
+    }
+
+    private fun prepareSharedElementTransition() {
+        setEnterSharedElementCallback(
+            object : SharedElementCallback() {
+                override fun onMapSharedElements(
+                    names: List<String?>,
+                    sharedElements: MutableMap<String?, View?>) {
+                    vb.root.transitionName = names[0]
+                    sharedElements[names[0]] = vb.root
+                }
+            })
     }
 
     private fun setupViewPager() {
@@ -57,6 +76,10 @@ class PlantDetailFragment: Fragment() {
                     plant.pic04Url?.takeIf { it.isNotEmpty() }?.let { add(it) }
                 }
                 plantPicsAdapter.submitList(pics)
+
+                (view?.parent as? ViewGroup)?.doOnPreDraw {
+                    startPostponedEnterTransition()
+                }
 
                 vb.layoutTitle.tvTitle.text = plant.chName
                 vb.layoutTitle.tvContent.text = plant.enName

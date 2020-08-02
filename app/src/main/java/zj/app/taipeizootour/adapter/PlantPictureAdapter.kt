@@ -37,7 +37,9 @@ class PlantPictureAdapter: ListAdapter<String, PlantPictureAdapter.PlantPictureV
     ): RecyclerView.ViewHolder(vb.root) {
 
         fun bind(picUrl: String) {
-            vb.ivPic.load(picUrl)
+            vb.ivPic.load(picUrl) {
+                allowHardware(false)
+            }
         }
     }
 }

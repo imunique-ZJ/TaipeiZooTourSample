@@ -2,6 +2,7 @@ package zj.app.taipeizootour.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ import zj.app.taipeizootour.db.model.ZooPlant
 class ZooPlantsAdapter(private val onClick: OnPlantClick): ListAdapter<ZooPlant, ZooPlantsAdapter.ZooPlantViewHolder>(diffCallback) {
 
     interface OnPlantClick {
-        fun onClick(plant: ZooPlant)
+        fun onClick(vb: LayoutZooRecyclerviewItemBinding, plant: ZooPlant)
     }
 
     companion object {
@@ -45,12 +46,15 @@ class ZooPlantsAdapter(private val onClick: OnPlantClick): ListAdapter<ZooPlant,
             vb.ivPic.load(plant.pic01Url) {
                 placeholder(R.drawable.ic_baseline_pets_24)
                 scale(Scale.FILL)
+                allowHardware(false)
             }
+            ViewCompat.setTransitionName(vb.ivPic, plant.chName)
+            ViewCompat.setTransitionName(vb.root, "${plant.plantId}_${plant.chName}")
             vb.tvTitle.text = plant.chName
             vb.tvDesc.text = plant.brief
 
             vb.root.setOnClickListener {
-                onClick.onClick(plant)
+                onClick.onClick(vb, plant)
             }
         }
     }

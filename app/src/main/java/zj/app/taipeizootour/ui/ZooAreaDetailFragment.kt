@@ -1,8 +1,8 @@
 package zj.app.taipeizootour.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -16,23 +16,36 @@ import coil.size.Scale
 import zj.app.taipeizootour.R
 import zj.app.taipeizootour.adapter.ZooPlantsAdapter
 import zj.app.taipeizootour.databinding.FragmentZooAreaDetailBinding
+import zj.app.taipeizootour.databinding.LayoutZooRecyclerviewItemBinding
 import zj.app.taipeizootour.db.model.ZooPlant
 import zj.app.taipeizootour.ext.dpToPx
 import zj.app.taipeizootour.viewmodel.DetailActivityViewModel
 
-
 class ZooAreaDetailFragment: Fragment() {
+
+    interface OnPlantSelected {
+        fun onPlantSelected(vb: LayoutZooRecyclerviewItemBinding, plant: ZooPlant)
+    }
 
     private var _vb: FragmentZooAreaDetailBinding? = null
     private val vb get() = _vb!!
 
+    private var onPlantSelected: OnPlantSelected? = null
     private val vm: DetailActivityViewModel by activityViewModels()
     private val plantsAdapter by lazy {
         ZooPlantsAdapter(object: ZooPlantsAdapter.OnPlantClick {
-            override fun onClick(plant: ZooPlant) {
+            override fun onClick(vb: LayoutZooRecyclerviewItemBinding, plant: ZooPlant) {
                 vm.selectPlant(plant)
+                onPlantSelected?.onPlantSelected(vb, plant)
             }
         })
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnPlantSelected) {
+            onPlantSelected = context
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater,
