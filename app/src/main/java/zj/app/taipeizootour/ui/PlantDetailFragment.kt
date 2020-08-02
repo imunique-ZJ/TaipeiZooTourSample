@@ -88,6 +88,10 @@ class PlantDetailFragment : Fragment() {
                     plant.pic02Url?.takeIf { it.isNotEmpty() }?.let { add(it) }
                     plant.pic03Url?.takeIf { it.isNotEmpty() }?.let { add(it) }
                     plant.pic04Url?.takeIf { it.isNotEmpty() }?.let { add(it) }
+                    // if no picture urls, add an empty path for displaying placeholder
+                    if (isEmpty()) {
+                        add("")
+                    }
                 }
                 plantPicsAdapter.submitList(pics)
 
