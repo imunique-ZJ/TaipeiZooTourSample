@@ -47,6 +47,7 @@
             android:padding="4dp"
             android:scaleType="centerCrop"
             android:elevation="6dp"
+            android:background="@color/colorPrimary"
             app:strokeColor="@android:color/white"
             app:strokeWidth="8dp"
             app:shapeAppearanceOverlay="@style/circleImage"

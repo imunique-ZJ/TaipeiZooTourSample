@@ -44,6 +44,7 @@ class ZooAreaAdapter(private val onClick: OnAreaClick): ListAdapter<ZooArea, Zoo
         fun bind(zooArea: ZooArea) {
             vb.ivPic.load(zooArea.picUrl) {
                 placeholder(R.drawable.ic_baseline_pets_24)
+                error(R.drawable.ic_baseline_pets_24)
                 scale(Scale.FILL)
             }
             vb.tvTitle.text = zooArea.name

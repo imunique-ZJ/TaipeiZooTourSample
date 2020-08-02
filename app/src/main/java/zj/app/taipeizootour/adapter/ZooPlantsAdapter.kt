@@ -45,6 +45,7 @@ class ZooPlantsAdapter(private val onClick: OnPlantClick): ListAdapter<ZooPlant,
         fun bind(plant: ZooPlant) {
             vb.ivPic.load(plant.pic01Url) {
                 placeholder(R.drawable.ic_baseline_pets_24)
+                error(R.drawable.ic_baseline_pets_24)
                 scale(Scale.FILL)
                 allowHardware(false)
             }

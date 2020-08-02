@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import zj.app.taipeizootour.R
 import zj.app.taipeizootour.databinding.LayoutPlantPicRecyclerviewItemBinding
 
 class PlantPictureAdapter: ListAdapter<String, PlantPictureAdapter.PlantPictureViewHolder>(diffCallback) {
@@ -38,6 +39,8 @@ class PlantPictureAdapter: ListAdapter<String, PlantPictureAdapter.PlantPictureV
 
         fun bind(picUrl: String) {
             vb.ivPic.load(picUrl) {
+                placeholder(R.drawable.ic_baseline_pets_24)
+                error(R.drawable.ic_baseline_pets_24)
                 allowHardware(false)
             }
         }
