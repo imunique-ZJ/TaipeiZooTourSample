@@ -2,6 +2,7 @@ package zj.app.taipeizootour.viewmodel
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,6 +11,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import zj.app.taipeizootour.api.data.DataSetMetadata
 import zj.app.taipeizootour.const.Constants
+import zj.app.taipeizootour.db.data.AreaWithPlants
+import zj.app.taipeizootour.db.model.ZooPlant
 import zj.app.taipeizootour.repo.IZooRepo
 import zj.app.taipeizootour.state.ZooAreaState
 import java.text.SimpleDateFormat
@@ -20,9 +23,13 @@ class MainActivityViewModel(
     private val zooRepo: IZooRepo
 ) : ViewModel() {
 
-    val state = MutableLiveData<ZooAreaState>(ZooAreaState.Loading)
+    private val areaWithPlants = MutableLiveData<AreaWithPlants?>()
+    private val selectedPlantId = MutableLiveData<ZooPlant?>()
 
+    val state = MutableLiveData<ZooAreaState>(ZooAreaState.Loading)
     val areaLiveData = zooRepo.getLiveArea()
+    val areaWithPlantsLiveData: LiveData<AreaWithPlants?> = areaWithPlants
+    val selectedPlantIdLiveData: LiveData<ZooPlant?> = selectedPlantId
 
     fun fetchData(areaIntroQuery: String, plantsQuery: String) {
         viewModelScope.launch {
@@ -38,6 +45,16 @@ class MainActivityViewModel(
             }
             state.value = ZooAreaState.Finish
         }
+    }
+
+    fun fetchAreaPlants(areaId: Int) {
+        viewModelScope.launch {
+            areaWithPlants.value = zooRepo.getAreaPlants(areaId)
+        }
+    }
+
+    fun selectPlant(plant: ZooPlant) {
+        selectedPlantId.value = plant
     }
 
     private suspend fun getNewMeta(query: String, dataTimePrefKey: String): DataSetMetadata? {

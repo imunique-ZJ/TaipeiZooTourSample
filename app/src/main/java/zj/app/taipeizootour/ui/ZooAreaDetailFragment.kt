@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.SharedElementCallback
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -19,19 +21,19 @@ import zj.app.taipeizootour.databinding.FragmentZooAreaDetailBinding
 import zj.app.taipeizootour.databinding.LayoutZooRecyclerviewItemBinding
 import zj.app.taipeizootour.db.model.ZooPlant
 import zj.app.taipeizootour.ext.dpToPx
-import zj.app.taipeizootour.viewmodel.DetailActivityViewModel
+import zj.app.taipeizootour.viewmodel.MainActivityViewModel
 
 class ZooAreaDetailFragment: Fragment() {
 
     interface OnPlantSelected {
-        fun onPlantSelected(vb: LayoutZooRecyclerviewItemBinding, plant: ZooPlant)
+        fun onPlantSelected(itemVb: LayoutZooRecyclerviewItemBinding, plant: ZooPlant)
     }
 
     private var _vb: FragmentZooAreaDetailBinding? = null
     private val vb get() = _vb!!
 
     private var onPlantSelected: OnPlantSelected? = null
-    private val vm: DetailActivityViewModel by activityViewModels()
+    private val vm: MainActivityViewModel by activityViewModels()
     private val plantsAdapter by lazy {
         ZooPlantsAdapter(object: ZooPlantsAdapter.OnPlantClick {
             override fun onClick(vb: LayoutZooRecyclerviewItemBinding, plant: ZooPlant) {
@@ -52,6 +54,10 @@ class ZooAreaDetailFragment: Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         _vb = FragmentZooAreaDetailBinding.inflate(inflater, container, false)
+        prepareSharedElementTransition()
+        if (savedInstanceState == null) {
+            postponeEnterTransition();
+        }
         return vb.root
     }
 
@@ -65,6 +71,18 @@ class ZooAreaDetailFragment: Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _vb = null
+    }
+
+    private fun prepareSharedElementTransition() {
+        setEnterSharedElementCallback(
+            object : SharedElementCallback() {
+                override fun onMapSharedElements(
+                    names: List<String?>,
+                    sharedElements: MutableMap<String?, View?>) {
+                    vb.appBar.transitionName = names[0]
+                    sharedElements[names[0]] = vb.appBar
+                }
+            })
     }
 
     private fun setupAppBar() {
@@ -93,6 +111,11 @@ class ZooAreaDetailFragment: Fragment() {
                 scale(Scale.FILL)
             }
             vb.tvDesc.text = areaWithPlants?.area?.info
+
+            (view?.parent as? ViewGroup)?.doOnPreDraw {
+                startPostponedEnterTransition()
+            }
+
             plantsAdapter.submitList(areaWithPlants?.plants)
         })
     }

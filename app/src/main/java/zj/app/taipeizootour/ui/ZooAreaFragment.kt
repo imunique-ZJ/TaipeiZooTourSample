@@ -1,6 +1,6 @@
 package zj.app.taipeizootour.ui
 
-import android.content.Intent
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import zj.app.taipeizootour.R
 import zj.app.taipeizootour.adapter.ZooAreaAdapter
 import zj.app.taipeizootour.databinding.FragmentZooAreaBinding
+import zj.app.taipeizootour.databinding.LayoutZooRecyclerviewItemBinding
 import zj.app.taipeizootour.db.model.ZooArea
 import zj.app.taipeizootour.ext.dpToPx
 import zj.app.taipeizootour.state.ZooAreaState
@@ -20,19 +21,28 @@ import zj.app.taipeizootour.viewmodel.MainActivityViewModel
 
 class ZooAreaFragment: Fragment() {
 
+    interface OnAreaSelected {
+        fun onAreaSelected(itemVb: LayoutZooRecyclerviewItemBinding, area: ZooArea)
+    }
+
     private var _vb: FragmentZooAreaBinding? = null
     private val vb get() = _vb!!
 
+    private var onAreaSelected: OnAreaSelected? = null
     private val vm: MainActivityViewModel by activityViewModels()
     private val zooAreaAdapter by lazy {
         ZooAreaAdapter(object: ZooAreaAdapter.OnAreaClick {
-            override fun onClick(area: ZooArea) {
-                val intent = Intent(requireActivity(), DetailActivity::class.java).apply {
-                    putExtra(DetailActivity.INTENT_KEY_AREA_ID, area.areaId)
-                }
-                startActivity(intent)
+            override fun onClick(vb: LayoutZooRecyclerviewItemBinding, area: ZooArea) {
+                onAreaSelected?.onAreaSelected(vb, area)
             }
         })
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnAreaSelected) {
+            onAreaSelected = context
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -65,7 +75,6 @@ class ZooAreaFragment: Fragment() {
             vm.fetchData(getString(R.string.query_meta_area_intro), getString(R.string.query_meta_plants))
         }
     }
-
 
     private fun setupRecyclerView() {
         vb.rvZooAreas.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)

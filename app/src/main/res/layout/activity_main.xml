@@ -24,10 +24,11 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentZooAreas"
+        android:id="@+id/fragmentContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:name="zj.app.taipeizootour.ui.ZooAreaFragment"
+        android:tag="areaList"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbar"
         app:layout_constraintRight_toRightOf="parent"
