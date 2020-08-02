@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.SharedElementCallback
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
@@ -30,13 +31,14 @@ class PlantDetailFragment : Fragment() {
         _vb = FragmentPlantDetailBinding.inflate(layoutInflater, container, false)
         prepareSharedElementTransition()
         if (savedInstanceState == null) {
-            postponeEnterTransition();
+            postponeEnterTransition()
         }
         return vb.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupAppBar()
         setupViewPager()
         bindLiveData()
     }
@@ -47,14 +49,26 @@ class PlantDetailFragment : Fragment() {
         _vb = null
     }
 
+    private fun setupAppBar() {
+        (activity as? AppCompatActivity)?.run {
+            setSupportActionBar(vb.toolbar)
+            vb.toolbar.title = ""
+            supportActionBar?.setDisplayShowHomeEnabled(true)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+        vb.toolbar.setNavigationOnClickListener {
+            activity?.onBackPressed()
+        }
+    }
+
     private fun prepareSharedElementTransition() {
         setEnterSharedElementCallback(
             object : SharedElementCallback() {
                 override fun onMapSharedElements(
                     names: List<String?>,
                     sharedElements: MutableMap<String?, View?>) {
-                    vb.root.transitionName = names[0]
-                    sharedElements[names[0]] = vb.root
+                    vb.vpPlantPics.transitionName = names[0]
+                    sharedElements[names[0]] = vb.vpPlantPics
                 }
             })
     }

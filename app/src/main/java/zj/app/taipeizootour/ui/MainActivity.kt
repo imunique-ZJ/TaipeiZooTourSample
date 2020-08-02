@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity(),
             }
 
             setReorderingAllowed(true)
-            addSharedElement(itemVb.root, itemVb.root.transitionName)
+            addSharedElement(itemVb.ivPic, itemVb.ivPic.transitionName)
             replace(R.id.fragmentContainer, plantDetailFragment, plantDetailTag)
             addToBackStack(plantDetailTag)
         }

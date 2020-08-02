@@ -50,7 +50,6 @@ class ZooPlantsAdapter(private val onClick: OnPlantClick): ListAdapter<ZooPlant,
                 allowHardware(false)
             }
             ViewCompat.setTransitionName(vb.ivPic, plant.chName)
-            ViewCompat.setTransitionName(vb.root, "${plant.plantId}_${plant.chName}")
             vb.tvTitle.text = plant.chName
             vb.tvDesc.text = plant.brief
 
