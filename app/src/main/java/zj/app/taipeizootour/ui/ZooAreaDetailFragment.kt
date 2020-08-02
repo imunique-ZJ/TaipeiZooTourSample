@@ -29,7 +29,9 @@ class ZooAreaDetailFragment: Fragment() {
     private val vm: DetailActivityViewModel by activityViewModels()
     private val plantsAdapter by lazy {
         ZooPlantsAdapter(object: ZooPlantsAdapter.OnPlantClick {
-            override fun onClick(plant: ZooPlant) {}
+            override fun onClick(plant: ZooPlant) {
+                vm.selectPlant(plant)
+            }
         })
     }
 
