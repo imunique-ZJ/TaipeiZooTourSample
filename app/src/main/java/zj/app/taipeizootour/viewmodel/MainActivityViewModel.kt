@@ -1,6 +1,7 @@
 package zj.app.taipeizootour.viewmodel
 
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,13 +27,11 @@ class MainActivityViewModel(
     fun fetchData(areaIntroQuery: String, plantsQuery: String) {
         viewModelScope.launch {
             state.value = ZooAreaState.Loading
-            val originalAreaIntroDataTime = sharedPreference.getLong(Constants.KEY_SP_ZOO_AREA_INTRO_DATE_TIME, -1L)
-            val areaIntroMeta = getNewMeta(areaIntroQuery, originalAreaIntroDataTime)
+            val areaIntroMeta = getNewMeta(areaIntroQuery, Constants.KEY_SP_ZOO_AREA_INTRO_DATE_TIME)
             val areaIntroRid = areaIntroMeta?.resources?.firstOrNull()?.resourceId
             if (areaIntroRid != null) {
                 zooRepo.fetchAreaIntro(areaIntroMeta.id, areaIntroRid)
-                val originalPlantsDataTime = sharedPreference.getLong(Constants.KEY_SP_ZOO_PLANTS_DATE_TIME, -1L)
-                val plantsMeta = getNewMeta(plantsQuery, originalPlantsDataTime)
+                val plantsMeta = getNewMeta(plantsQuery, Constants.KEY_SP_ZOO_PLANTS_DATE_TIME)
                 plantsMeta?.resources?.firstOrNull()?.resourceId?.let { plantsRid ->
                     zooRepo.fetchPlants(plantsRid)
                 }
@@ -41,11 +40,18 @@ class MainActivityViewModel(
         }
     }
 
-    private suspend fun getNewMeta(query: String, originalDataTime: Long): DataSetMetadata? {
+    private suspend fun getNewMeta(query: String, dataTimePrefKey: String): DataSetMetadata? {
         return withContext(Dispatchers.IO) {
             zooRepo.fetchMeta(query)?.takeIf { meta ->
                 val dataTime = timeFormat.parse(meta.metadataModified)?.time ?: -1L
-                dataTime > originalDataTime
+                val originalDataTime = sharedPreference.getLong(dataTimePrefKey, -1L)
+                val hasUpdate = dataTime > originalDataTime
+                if (hasUpdate) {
+                    sharedPreference.edit {
+                        putLong(dataTimePrefKey, dataTime)
+                    }
+                }
+                return@takeIf hasUpdate
             }
         }
     }
