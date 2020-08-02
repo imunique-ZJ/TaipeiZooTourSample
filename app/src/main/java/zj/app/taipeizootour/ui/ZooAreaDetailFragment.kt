@@ -54,19 +54,15 @@ class ZooAreaDetailFragment: Fragment() {
         _vb = null
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> childFragmentManager.popBackStackImmediate()
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     private fun setupAppBar() {
         (activity as? AppCompatActivity)?.run {
             setSupportActionBar(vb.toolbar)
             supportActionBar?.title = ""
             supportActionBar?.setDisplayShowHomeEnabled(true)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+        vb.toolbar.setNavigationOnClickListener {
+            activity?.onBackPressed()
         }
     }
 
