@@ -41,6 +41,8 @@ dependencies {
     implementation("com.google.android.material:material:1.2.0-rc01")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("io.coil-kt:coil:0.11.0")
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("me.relex:circleindicator:2.1.4")
 
     // RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.2.0-alpha05")

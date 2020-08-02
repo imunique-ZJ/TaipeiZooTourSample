@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_plant_detail.*
 import zj.app.taipeizootour.R
 import zj.app.taipeizootour.adapter.PlantPictureAdapter
 import zj.app.taipeizootour.databinding.FragmentPlantDetailBinding
@@ -31,18 +30,20 @@ class PlantDetailFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
+        setupViewPager()
         bindLiveData()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        plantPicsAdapter.unregisterAdapterDataObserver(pagerIndicator.adapterDataObserver)
         _vb = null
     }
 
-    private fun setupRecyclerView() {
-        vb.rvPlantPics.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        vb.rvPlantPics.adapter = plantPicsAdapter
+    private fun setupViewPager() {
+        vb.vpPlantPics.adapter = plantPicsAdapter
+        vb.pagerIndicator.setViewPager(vb.vpPlantPics)
+        plantPicsAdapter.registerAdapterDataObserver(pagerIndicator.adapterDataObserver)
     }
 
     @OptIn(ExperimentalStdlibApi::class)

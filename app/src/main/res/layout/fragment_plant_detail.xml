@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPlantPics"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpPlantPics"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="16:9"
@@ -21,6 +21,14 @@
             tools:orientation="horizontal"
             tools:listitem="@layout/layout_plant_pic_recyclerview_item"
             tools:itemCount="4"/>
+
+        <me.relex.circleindicator.CircleIndicator3
+            android:id="@+id/pagerIndicator"
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/vpPlantPics"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -37,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintLeft_toLeftOf="@id/guideStart"
-            app:layout_constraintTop_toBottomOf="@id/rvPlantPics"
+            app:layout_constraintTop_toBottomOf="@id/vpPlantPics"
             app:layout_constraintRight_toRightOf="@id/guideEnd"
             app:layout_constraintBottom_toBottomOf="parent">
 
