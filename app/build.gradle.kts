@@ -1,7 +1,9 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-android-extensions")
+    id("dagger.hilt.android.plugin")
+    kotlin("android")
+    kotlin("android.extensions")
+    kotlin("kapt")
 }
 
 android {
@@ -43,6 +45,9 @@ dependencies {
     implementation("io.coil-kt:coil:0.11.0")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("me.relex:circleindicator:2.1.4")
+
+    implementation("com.google.dagger:hilt-android:2.28-alpha")
+    kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
 
     // RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.2.0-alpha05")
