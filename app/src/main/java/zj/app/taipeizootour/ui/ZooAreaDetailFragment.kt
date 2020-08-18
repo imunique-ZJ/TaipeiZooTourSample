@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import coil.size.Scale
+import dagger.hilt.android.AndroidEntryPoint
 import zj.app.taipeizootour.R
 import zj.app.taipeizootour.adapter.ZooPlantsAdapter
 import zj.app.taipeizootour.databinding.FragmentZooAreaDetailBinding
@@ -23,6 +24,7 @@ import zj.app.taipeizootour.db.model.ZooPlant
 import zj.app.taipeizootour.ext.dpToPx
 import zj.app.taipeizootour.viewmodel.MainActivityViewModel
 
+@AndroidEntryPoint
 class ZooAreaDetailFragment: Fragment() {
 
     interface OnPlantSelected {

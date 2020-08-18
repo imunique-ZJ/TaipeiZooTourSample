@@ -8,6 +8,7 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.transition.Hold
 import com.google.android.material.transition.MaterialContainerTransform
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import zj.app.taipeizootour.R
 import zj.app.taipeizootour.api.TaipeiOpenDataApi
@@ -24,6 +25,7 @@ import zj.app.taipeizootour.viewmodel.MainActivityViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(),
     ZooAreaFragment.OnAreaSelected,
     ZooAreaDetailFragment.OnPlantSelected {

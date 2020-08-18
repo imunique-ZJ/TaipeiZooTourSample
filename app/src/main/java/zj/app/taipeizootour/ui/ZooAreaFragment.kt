@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import zj.app.taipeizootour.R
 import zj.app.taipeizootour.adapter.ZooAreaAdapter
 import zj.app.taipeizootour.databinding.FragmentZooAreaBinding
@@ -20,6 +21,7 @@ import zj.app.taipeizootour.ext.dpToPx
 import zj.app.taipeizootour.state.ZooAreaState
 import zj.app.taipeizootour.viewmodel.MainActivityViewModel
 
+@AndroidEntryPoint
 class ZooAreaFragment: Fragment() {
 
     interface OnAreaSelected {

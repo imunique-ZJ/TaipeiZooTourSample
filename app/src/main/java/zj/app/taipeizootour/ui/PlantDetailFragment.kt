@@ -10,13 +10,14 @@ import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_plant_detail.*
 import zj.app.taipeizootour.R
 import zj.app.taipeizootour.adapter.PlantPictureAdapter
 import zj.app.taipeizootour.databinding.FragmentPlantDetailBinding
 import zj.app.taipeizootour.viewmodel.MainActivityViewModel
 
-
+@AndroidEntryPoint
 class PlantDetailFragment : Fragment() {
 
     private var _vb: FragmentPlantDetailBinding? = null
