@@ -11,7 +11,6 @@ import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import zj.app.taipeizootour.R
-import zj.app.taipeizootour.api.TaipeiOpenDataApi
 import zj.app.taipeizootour.const.AnimConstants
 import zj.app.taipeizootour.const.Constants
 import zj.app.taipeizootour.databinding.ActivityMainBinding
@@ -20,10 +19,11 @@ import zj.app.taipeizootour.db.ZooDatabase
 import zj.app.taipeizootour.db.model.ZooArea
 import zj.app.taipeizootour.db.model.ZooPlant
 import zj.app.taipeizootour.ext.getViewModel
-import zj.app.taipeizootour.repo.ZooRepo
+import zj.app.taipeizootour.repo.IZooRepo
 import zj.app.taipeizootour.viewmodel.MainActivityViewModel
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(),
@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity(),
 
     private lateinit var vb: ActivityMainBinding
     private lateinit var vm: MainActivityViewModel
+
+    @Inject
+    lateinit var zooRepo: IZooRepo
 
     private val areaListTag = "areaList"
     private val areaDetailTag = "areaDetail"
@@ -48,12 +51,7 @@ class MainActivity : AppCompatActivity(),
             MainActivityViewModel(
                 getSharedPreferences(Constants.KEY_SHARED_PREF_NAME, Context.MODE_PRIVATE),
                 timeFormat,
-                ZooRepo(
-                    TaipeiOpenDataApi,
-                    db.zooAreaDao(),
-                    db.zooPlantDao(),
-                    db.areaPlantsDao()
-                )
+                zooRepo
             )
         }
         vm.fetchData(getString(R.string.query_meta_area_intro), getString(R.string.query_meta_plants))

@@ -12,8 +12,9 @@ import zj.app.taipeizootour.api.data.ApiResponse
 import zj.app.taipeizootour.api.data.csv.AreaIntro
 import zj.app.taipeizootour.api.data.Response
 import zj.app.taipeizootour.api.data.json.Plant
+import javax.inject.Inject
 
-object TaipeiOpenDataApi: ITaipeiOpenDataApi {
+class TaipeiOpenDataApi @Inject constructor(): ITaipeiOpenDataApi {
 
     private val openDataService = Retrofit.Builder()
         .baseUrl("https://data.taipei/api/")

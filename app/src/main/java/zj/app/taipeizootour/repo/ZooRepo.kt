@@ -11,8 +11,9 @@ import zj.app.taipeizootour.db.data.AreaWithPlants
 import zj.app.taipeizootour.db.model.AreaPlantsCrossRef
 import zj.app.taipeizootour.db.model.ZooArea
 import zj.app.taipeizootour.db.model.ZooPlant
+import javax.inject.Inject
 
-class ZooRepo(
+class ZooRepo @Inject constructor(
     private val api: ITaipeiOpenDataApi,
     private val zooAreaDao: ZooAreaDao,
     private val plantsDao: ZooPlantDao,
