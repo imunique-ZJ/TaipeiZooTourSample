@@ -12,7 +12,7 @@ import zj.app.taipeizootour.api.TaipeiOpenDataApi
 object ApiModule {
 
     @Provides
-    fun provideTaipeiOpenDataApi(taipeiOpenDataApi: TaipeiOpenDataApi): ITaipeiOpenDataApi {
+    fun provideTaipeiOpenDataApi(): ITaipeiOpenDataApi {
         return TaipeiOpenDataApi()
     }
 }
