@@ -1,7 +1,7 @@
 package zj.app.taipeizootour.ui
 
-import android.content.Context
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
@@ -12,17 +12,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import zj.app.taipeizootour.R
 import zj.app.taipeizootour.const.AnimConstants
-import zj.app.taipeizootour.const.Constants
 import zj.app.taipeizootour.databinding.ActivityMainBinding
 import zj.app.taipeizootour.databinding.LayoutZooRecyclerviewItemBinding
-import zj.app.taipeizootour.db.ZooDatabase
 import zj.app.taipeizootour.db.model.ZooArea
 import zj.app.taipeizootour.db.model.ZooPlant
-import zj.app.taipeizootour.ext.getViewModel
 import zj.app.taipeizootour.repo.IZooRepo
 import zj.app.taipeizootour.viewmodel.MainActivityViewModel
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -31,7 +26,7 @@ class MainActivity : AppCompatActivity(),
     ZooAreaDetailFragment.OnPlantSelected {
 
     private lateinit var vb: ActivityMainBinding
-    private lateinit var vm: MainActivityViewModel
+    private val vm: MainActivityViewModel by viewModels()
 
     @Inject
     lateinit var zooRepo: IZooRepo
@@ -44,16 +39,6 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         vb = ActivityMainBinding.inflate(layoutInflater)
         setContentView(vb.root)
-
-        vm = getViewModel {
-            val db = ZooDatabase.getDatabase(applicationContext)
-            val timeFormat = SimpleDateFormat("yyyy-mm-dd HH:mm:ss", Locale.getDefault())
-            MainActivityViewModel(
-                getSharedPreferences(Constants.KEY_SHARED_PREF_NAME, Context.MODE_PRIVATE),
-                timeFormat,
-                zooRepo
-            )
-        }
         vm.fetchData(getString(R.string.query_meta_area_intro), getString(R.string.query_meta_plants))
     }
 

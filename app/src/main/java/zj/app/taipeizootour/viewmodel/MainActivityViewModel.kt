@@ -2,10 +2,8 @@ package zj.app.taipeizootour.viewmodel
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -13,13 +11,14 @@ import zj.app.taipeizootour.api.data.DataSetMetadata
 import zj.app.taipeizootour.const.Constants
 import zj.app.taipeizootour.db.data.AreaWithPlants
 import zj.app.taipeizootour.db.model.ZooPlant
+import zj.app.taipeizootour.hilt.qualifier.YYYYmmddHHmmssDateFormat
 import zj.app.taipeizootour.repo.IZooRepo
 import zj.app.taipeizootour.state.ZooAreaState
 import java.text.SimpleDateFormat
 
-class MainActivityViewModel(
+class MainActivityViewModel @ViewModelInject constructor(
     private val sharedPreference: SharedPreferences,
-    private val timeFormat: SimpleDateFormat,
+    @YYYYmmddHHmmssDateFormat private val timeFormat: SimpleDateFormat,
     private val zooRepo: IZooRepo
 ) : ViewModel() {
 
