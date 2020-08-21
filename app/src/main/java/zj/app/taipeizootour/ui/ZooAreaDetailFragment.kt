@@ -10,7 +10,6 @@ import androidx.core.app.SharedElementCallback
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
@@ -106,7 +105,7 @@ class ZooAreaDetailFragment: Fragment() {
     }
 
     private fun bindLiveData() {
-        vm.areaWithPlantsLiveData.observe(viewLifecycleOwner, Observer { areaWithPlants ->
+        vm.areaWithPlantsLiveData.observe(viewLifecycleOwner, { areaWithPlants ->
             vb.collapsingTbLayout.title = areaWithPlants?.area?.name
             vb.ivPic.load(areaWithPlants?.area?.picUrl) {
                 placeholder(R.drawable.ic_baseline_pets_24)

@@ -9,7 +9,6 @@ import androidx.core.app.SharedElementCallback
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_plant_detail.*
 import zj.app.taipeizootour.R
@@ -82,7 +81,7 @@ class PlantDetailFragment : Fragment() {
 
     @OptIn(ExperimentalStdlibApi::class)
     private fun bindLiveData() {
-        vm.selectedPlantIdLiveData.observe(viewLifecycleOwner, Observer { zooPlant ->
+        vm.selectedPlantIdLiveData.observe(viewLifecycleOwner, { zooPlant ->
             zooPlant?.let { plant ->
                 val pics = buildList {
                     plant.pic01Url?.takeIf { it.isNotEmpty() }?.let { add(it) }

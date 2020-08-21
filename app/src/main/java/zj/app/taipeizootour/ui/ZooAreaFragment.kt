@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
@@ -86,14 +84,14 @@ class ZooAreaFragment: Fragment() {
     }
 
     private fun bindLiveData() {
-        vm.state.observe(viewLifecycleOwner, Observer { state ->
+        vm.state.observe(viewLifecycleOwner, { state ->
             when (state) {
                 is ZooAreaState.Loading -> vb.srlZooArea.isRefreshing = true
                 is ZooAreaState.Finish -> vb.srlZooArea.isRefreshing = false
             }
         })
 
-        vm.areaLiveData.observe(viewLifecycleOwner, Observer { areas ->
+        vm.areaLiveData.observe(viewLifecycleOwner, { areas ->
             zooAreaAdapter.submitList(areas)
         })
     }
