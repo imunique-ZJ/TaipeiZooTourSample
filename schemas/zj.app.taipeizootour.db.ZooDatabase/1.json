@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e807c5d325b37128ccf107cc5e92213d",
+    "identityHash": "aa12fc6228966bc10b5cf43bde6d4fce",
     "entities": [
       {
         "tableName": "ZooArea",
@@ -238,12 +238,299 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "ZooAnimal",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`animalId` INTEGER NOT NULL, `code` TEXT NOT NULL, `location` TEXT NOT NULL, `latinName` TEXT NOT NULL, `chName` TEXT NOT NULL, `enName` TEXT NOT NULL, `alsoKnown` TEXT NOT NULL, `geo` TEXT NOT NULL, `phylum` TEXT NOT NULL, `clazz` TEXT NOT NULL, `order` TEXT NOT NULL, `family` TEXT NOT NULL, `behavior` TEXT NOT NULL, `distribution` TEXT NOT NULL, `feature` TEXT NOT NULL, `diet` TEXT NOT NULL, `habitat` TEXT NOT NULL, `conservation` TEXT NOT NULL, `crisis` TEXT NOT NULL, `interpretation` TEXT NOT NULL, `summary` TEXT NOT NULL, `updateDate` TEXT NOT NULL, `pic01Url` TEXT NOT NULL, `pic01Alt` TEXT NOT NULL, `pic02Url` TEXT NOT NULL, `pic02Alt` TEXT NOT NULL, `pic03Url` TEXT NOT NULL, `pic03Alt` TEXT NOT NULL, `pic04Url` TEXT NOT NULL, `pic04Alt` TEXT NOT NULL, `voice01Url` TEXT NOT NULL, `voice01Alt` TEXT NOT NULL, `voice02Url` TEXT NOT NULL, `voice02Alt` TEXT NOT NULL, `voice03Url` TEXT NOT NULL, `voice03Alt` TEXT NOT NULL, `videoUrl` TEXT NOT NULL, `pdf01Url` TEXT NOT NULL, `pdf01Alt` TEXT NOT NULL, `pdf02Url` TEXT NOT NULL, `pdf02Alt` TEXT NOT NULL, PRIMARY KEY(`animalId`))",
+        "fields": [
+          {
+            "fieldPath": "animalId",
+            "columnName": "animalId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "code",
+            "columnName": "code",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "location",
+            "columnName": "location",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "latinName",
+            "columnName": "latinName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chName",
+            "columnName": "chName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "enName",
+            "columnName": "enName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "alsoKnown",
+            "columnName": "alsoKnown",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "geo",
+            "columnName": "geo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "phylum",
+            "columnName": "phylum",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "clazz",
+            "columnName": "clazz",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "order",
+            "columnName": "order",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "family",
+            "columnName": "family",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "behavior",
+            "columnName": "behavior",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "distribution",
+            "columnName": "distribution",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "feature",
+            "columnName": "feature",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "diet",
+            "columnName": "diet",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "habitat",
+            "columnName": "habitat",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "conservation",
+            "columnName": "conservation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "crisis",
+            "columnName": "crisis",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "interpretation",
+            "columnName": "interpretation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "summary",
+            "columnName": "summary",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updateDate",
+            "columnName": "updateDate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pic01Url",
+            "columnName": "pic01Url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pic01Alt",
+            "columnName": "pic01Alt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pic02Url",
+            "columnName": "pic02Url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pic02Alt",
+            "columnName": "pic02Alt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pic03Url",
+            "columnName": "pic03Url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pic03Alt",
+            "columnName": "pic03Alt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pic04Url",
+            "columnName": "pic04Url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pic04Alt",
+            "columnName": "pic04Alt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "voice01Url",
+            "columnName": "voice01Url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "voice01Alt",
+            "columnName": "voice01Alt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "voice02Url",
+            "columnName": "voice02Url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "voice02Alt",
+            "columnName": "voice02Alt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "voice03Url",
+            "columnName": "voice03Url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "voice03Alt",
+            "columnName": "voice03Alt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "videoUrl",
+            "columnName": "videoUrl",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pdf01Url",
+            "columnName": "pdf01Url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pdf01Alt",
+            "columnName": "pdf01Alt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pdf02Url",
+            "columnName": "pdf02Url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pdf02Alt",
+            "columnName": "pdf02Alt",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "animalId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "AreaAnimalsCrossRef",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`areaId` INTEGER NOT NULL, `animalId` INTEGER NOT NULL, PRIMARY KEY(`areaId`, `animalId`))",
+        "fields": [
+          {
+            "fieldPath": "areaId",
+            "columnName": "areaId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "animalId",
+            "columnName": "animalId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "areaId",
+            "animalId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e807c5d325b37128ccf107cc5e92213d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'aa12fc6228966bc10b5cf43bde6d4fce')"
     ]
   }
 }
