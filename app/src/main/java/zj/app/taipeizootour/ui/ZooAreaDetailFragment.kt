@@ -57,7 +57,7 @@ class ZooAreaDetailFragment: Fragment() {
         _vb = FragmentZooAreaDetailBinding.inflate(inflater, container, false)
         prepareSharedElementTransition()
         if (savedInstanceState == null) {
-            postponeEnterTransition();
+            postponeEnterTransition()
         }
         return vb.root
     }
