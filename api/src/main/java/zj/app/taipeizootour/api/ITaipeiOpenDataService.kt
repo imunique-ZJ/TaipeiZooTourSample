@@ -7,6 +7,7 @@ import zj.app.taipeizootour.api.data.DataSetMetadata
 import zj.app.taipeizootour.api.data.ApiResponse
 import zj.app.taipeizootour.api.data.csv.AreaIntro
 import zj.app.taipeizootour.api.data.Response
+import zj.app.taipeizootour.api.data.json.Animal
 import zj.app.taipeizootour.api.data.json.Plant
 
 interface ITaipeiOpenDataService {
@@ -22,4 +23,10 @@ interface ITaipeiOpenDataService {
     suspend fun getPlantsJson(@Path("rid") rid: String,
                               @Query("offset") offset: Int,
                               @Query("limit") limit: Int): ApiResponse<Response<Plant>>
+
+
+    @GET("v1/dataset/{rid}?scope=resourceAquire")
+    suspend fun getAnimalsJson(@Path("rid") rid: String,
+                               @Query("offset") offset: Int,
+                               @Query("limit") limit: Int): ApiResponse<Response<Animal>>
 }
