@@ -7,9 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import zj.app.taipeizootour.db.ZooDatabase
-import zj.app.taipeizootour.db.dao.AreaPlantsDao
-import zj.app.taipeizootour.db.dao.ZooAreaDao
-import zj.app.taipeizootour.db.dao.ZooPlantDao
+import zj.app.taipeizootour.db.dao.*
 
 @Module
 @InstallIn(ApplicationComponent::class)
@@ -27,5 +25,12 @@ object DatabaseModule {
     fun provideAreaPlantsDao(zooDatabase: ZooDatabase): AreaPlantsDao = zooDatabase.areaPlantsDao()
 
     @Provides
+    fun provideAreaAnimalsDao(zooDatabase: ZooDatabase): AreaAnimalsDao = zooDatabase.areaAnimalsDao()
+
+    @Provides
     fun provideZooPlantDao(zooDatabase: ZooDatabase): ZooPlantDao = zooDatabase.zooPlantDao()
+
+    @Provides
+    fun provideZooAnimalDao(zooDatabase: ZooDatabase): ZooAnimalDao = zooDatabase.zooAnimalDao()
+
 }

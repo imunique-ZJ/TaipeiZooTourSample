@@ -73,7 +73,11 @@ class ZooAreaFragment: Fragment() {
             android.R.color.holo_red_light
         )
         vb.srlZooArea.setOnRefreshListener {
-            vm.fetchData(getString(R.string.query_meta_area_intro), getString(R.string.query_meta_plants))
+            vm.fetchData(
+                getString(R.string.query_meta_area_intro),
+                getString(R.string.query_meta_plants),
+                getString(R.string.query_meta_animals)
+            )
         }
     }
 

@@ -39,12 +39,17 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         vb = ActivityMainBinding.inflate(layoutInflater)
         setContentView(vb.root)
-        vm.fetchData(getString(R.string.query_meta_area_intro), getString(R.string.query_meta_plants))
+        vm.fetchData(
+            getString(R.string.query_meta_area_intro),
+            getString(R.string.query_meta_plants),
+            getString(R.string.query_meta_animals)
+        )
     }
 
     override fun onAreaSelected(itemVb: LayoutZooRecyclerviewItemBinding, area: ZooArea) {
         lifecycleScope.launch {
             vm.fetchAreaPlants(area.areaId)
+            vm.fetchAreaAnimals(area.areaId)
         }
         supportFragmentManager.commit {
             supportFragmentManager.findFragmentByTag(areaListTag)?.run {
