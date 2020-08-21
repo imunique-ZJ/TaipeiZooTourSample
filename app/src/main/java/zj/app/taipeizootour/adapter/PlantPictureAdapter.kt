@@ -33,7 +33,7 @@ class PlantPictureAdapter: ListAdapter<String, PlantPictureAdapter.PlantPictureV
         holder.bind(getItem(position))
     }
 
-    inner class PlantPictureViewHolder(
+    class PlantPictureViewHolder(
         private val vb: LayoutPlantPicRecyclerviewItemBinding
     ): RecyclerView.ViewHolder(vb.root) {
 
