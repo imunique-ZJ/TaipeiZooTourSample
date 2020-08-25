@@ -1,12 +1,11 @@
 package zj.app.taipeizootour.viewmodel
 
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.core.content.edit
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import zj.app.taipeizootour.api.data.DataSetMetadata
 import zj.app.taipeizootour.const.Constants
 import zj.app.taipeizootour.db.data.AreaWithAnimals
@@ -23,6 +22,7 @@ class MainActivityViewModel @ViewModelInject constructor(
     private val zooRepo: IZooRepo
 ) : ViewModel() {
 
+    private val tagName = javaClass.simpleName
     private val areaWithPlants = MutableLiveData<AreaWithPlants?>()
     private val areaWithAnimals = MutableLiveData<AreaWithAnimals?>()
     private val selectedPlantId = MutableLiveData<ZooPlant?>()
@@ -40,14 +40,10 @@ class MainActivityViewModel @ViewModelInject constructor(
             val areaIntroRid = areaIntroMeta?.resources?.firstOrNull()?.resourceId
             if (areaIntroRid != null) {
                 zooRepo.fetchAreaIntro(areaIntroMeta.id, areaIntroRid)
-                val plantsMeta = getNewMeta(plantsQuery, Constants.KEY_SP_ZOO_PLANTS_DATE_TIME)
-                plantsMeta?.resources?.firstOrNull()?.resourceId?.let { plantsRid ->
-                    zooRepo.fetchPlants(plantsRid)
-                }
-                val animalMeta = getNewMeta(animalsQuery, Constants.KEY_SP_ZOO_ANIMALS_DATE_TIME)
-                animalMeta?.resources?.firstOrNull()?.resourceId?.let { plantsRid ->
-                    zooRepo.fetchAnimals(plantsRid)
-                }
+                awaitAll(
+                    async { fetchPlantsInfo(plantsQuery) },
+                    async { fetchAnimalsInfo(animalsQuery) }
+                )
             }
             state.value = ZooAreaState.Finish
         }
@@ -82,6 +78,28 @@ class MainActivityViewModel @ViewModelInject constructor(
                 }
                 return@takeIf hasUpdate
             }
+        }
+    }
+
+    private suspend fun fetchPlantsInfo(plantsQuery: String) {
+        try {
+            val plantsMeta = getNewMeta(plantsQuery, Constants.KEY_SP_ZOO_PLANTS_DATE_TIME)
+            plantsMeta?.resources?.firstOrNull()?.resourceId?.let { plantsRid ->
+                zooRepo.fetchPlants(plantsRid)
+            }
+        } catch (e: Exception) {
+            Log.d(tagName, e.message , e)
+        }
+    }
+
+    private suspend fun fetchAnimalsInfo(animalsQuery: String) {
+        try {
+            val animalMeta = getNewMeta(animalsQuery, Constants.KEY_SP_ZOO_ANIMALS_DATE_TIME)
+            animalMeta?.resources?.firstOrNull()?.resourceId?.let { plantsRid ->
+                zooRepo.fetchAnimals(plantsRid)
+            }
+        } catch (e: Exception) {
+            Log.d(tagName, e.message , e)
         }
     }
 }
