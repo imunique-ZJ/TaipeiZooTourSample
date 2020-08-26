@@ -14,6 +14,10 @@ interface AreaAnimalsDao {
 
     @Transaction
     @Query("SELECT * FROM ZooArea WHERE areaId = :areaId")
+    fun queryByAreaLive(areaId: Int): LiveData<AreaWithAnimals?>
+
+    @Transaction
+    @Query("SELECT * FROM ZooArea WHERE areaId = :areaId")
     suspend fun queryByArea(areaId: Int): AreaWithAnimals?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
