@@ -9,6 +9,9 @@ import zj.app.taipeizootour.db.model.ZooArea
 interface IZooRepo {
 
     fun getLiveArea(): LiveData<List<ZooArea>>
+    fun getLiveAreaPlants(areaId: Int): LiveData<AreaWithPlants?>
+    fun getLiveAreaAnimals(areaId: Int): LiveData<AreaWithAnimals?>
+
     suspend fun getAreaPlants(areaId: Int): AreaWithPlants?
     suspend fun getAreaAnimals(areaId: Int): AreaWithAnimals?
 

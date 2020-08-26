@@ -23,6 +23,14 @@ class ZooRepo @Inject constructor(
         return zooAreaDao.queryAll()
     }
 
+    override fun getLiveAreaPlants(areaId: Int): LiveData<AreaWithPlants?> {
+        return areaPlantsDao.queryByAreaLive(areaId)
+    }
+
+    override fun getLiveAreaAnimals(areaId: Int): LiveData<AreaWithAnimals?> {
+        return areaAnimalsDao.queryByAreaLive(areaId)
+    }
+
     override suspend fun getAreaPlants(areaId: Int): AreaWithPlants? {
         return areaPlantsDao.queryByArea(areaId)
     }
