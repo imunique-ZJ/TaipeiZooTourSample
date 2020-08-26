@@ -13,6 +13,7 @@ import zj.app.taipeizootour.const.AnimConstants
 import zj.app.taipeizootour.const.Constants
 import zj.app.taipeizootour.databinding.ActivityMainBinding
 import zj.app.taipeizootour.databinding.LayoutZooRecyclerviewItemBinding
+import zj.app.taipeizootour.db.model.ZooAnimal
 import zj.app.taipeizootour.db.model.ZooArea
 import zj.app.taipeizootour.db.model.ZooPlant
 import zj.app.taipeizootour.repo.IZooRepo
@@ -22,7 +23,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(),
     ZooAreaFragment.OnAreaSelected,
-    AreaPlantListFragment.OnPlantSelected {
+    AreaPlantListFragment.OnPlantSelected,
+    AreaAnimalListFragment.OnAnimalSelected {
 
     private lateinit var vb: ActivityMainBinding
     private val vm: MainActivityViewModel by viewModels()
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity(),
     private val areaListTag = "areaList"
     private val areaDetailTag = "areaDetail"
     private val plantDetailTag = "plantDetail"
+    private val animalDetailTag = "animalDetail"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +89,25 @@ class MainActivity : AppCompatActivity(),
             addSharedElement(itemVb.ivPic, itemVb.ivPic.transitionName)
             replace(R.id.fragmentContainer, plantDetailFragment, plantDetailTag)
             addToBackStack(plantDetailTag)
+        }
+    }
+
+    override fun onAnimalSelected(itemVb: LayoutZooRecyclerviewItemBinding, animal: ZooAnimal) {
+        vm.selectAnimal(animal)
+        supportFragmentManager.commit {
+            val detailFragment = supportFragmentManager.findFragmentByTag(areaDetailTag)
+            detailFragment?.exitTransition = Hold().apply {
+                duration = AnimConstants.SHARED_ELEMENT_DURATION
+            }
+            val animalDetailFragment = AnimalDetailFragment()
+            animalDetailFragment.sharedElementEnterTransition = MaterialContainerTransform().apply {
+                duration = AnimConstants.SHARED_ELEMENT_DURATION
+            }
+
+            setReorderingAllowed(true)
+            addSharedElement(itemVb.ivPic, itemVb.ivPic.transitionName)
+            replace(R.id.fragmentContainer, animalDetailFragment, animalDetailTag)
+            addToBackStack(animalDetailTag)
         }
     }
 }

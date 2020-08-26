@@ -6,7 +6,7 @@
     <string name="app_plant_genus">屬</string>
     <string name="app_plant_feature">辨別方式</string>
     <string name="app_plant_function">功能性</string>
-    <string name="app_plant_location">分佈位置</string>
+    <string name="app_plant_location">館區</string>
     <string name="app_plant_update_date">最後更新: %1$s</string>
 
 </resources>

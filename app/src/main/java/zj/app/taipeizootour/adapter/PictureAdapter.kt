@@ -9,7 +9,7 @@ import coil.api.load
 import zj.app.taipeizootour.R
 import zj.app.taipeizootour.databinding.LayoutPlantPicRecyclerviewItemBinding
 
-class PlantPictureAdapter: ListAdapter<String, PlantPictureAdapter.PlantPictureViewHolder>(diffCallback) {
+class PictureAdapter: ListAdapter<String, PictureAdapter.PictureViewHolder>(diffCallback) {
 
     companion object {
         val diffCallback = object: DiffUtil.ItemCallback<String>() {
@@ -23,17 +23,17 @@ class PlantPictureAdapter: ListAdapter<String, PlantPictureAdapter.PlantPictureV
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlantPictureViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PictureViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val vb = LayoutPlantPicRecyclerviewItemBinding.inflate(inflater, parent, false)
-        return PlantPictureViewHolder(vb)
+        return PictureViewHolder(vb)
     }
 
-    override fun onBindViewHolder(holder: PlantPictureViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PictureViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class PlantPictureViewHolder(
+    class PictureViewHolder(
         private val vb: LayoutPlantPicRecyclerviewItemBinding
     ): RecyclerView.ViewHolder(vb.root) {
 

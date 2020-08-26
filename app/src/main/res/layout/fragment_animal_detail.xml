@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vpAnimalPics"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="16:9"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:orientation="horizontal"
+                tools:listitem="@layout/layout_plant_pic_recyclerview_item"
+                tools:itemCount="4"/>
+
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/pagerIndicator"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/vpAnimalPics"/>
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:transitionName="toolbar"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardAnimalDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp"
+        app:shapeAppearanceOverlay="@style/BottomSheetCardViewShape"
+        app:cardElevation="8dp"
+        app:behavior_hideable="false"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintLeft_toLeftOf="@id/guideStart"
+            app:layout_constraintTop_toBottomOf="@id/vpPlantPics"
+            app:layout_constraintRight_toRightOf="@id/guideEnd"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:id="@+id/llAnimalDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:orientation="vertical">
+
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutTitle"/>
+
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutAlias"/>
+
+                <!-- 門 -->
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutPhylum"/>
+                <!-- 綱 -->
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutClazz"/>
+                <!-- 目 -->
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutOrder"/>
+                <!-- 科 -->
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutFamily"/>
+
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutInterpretation"/>
+
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutBehavior"/>
+
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutHabitat"/>
+
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutDiet"/>
+
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutFeature"/>
+
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutCrisis"/>
+
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutConservation"/>
+
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutDistribution"/>
+
+                <include
+                    layout="@layout/layout_text_desc"
+                    android:id="@+id/layoutLocation"/>
+
+                <TextView
+                    android:id="@+id/tvUpdateDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryTextInverse"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

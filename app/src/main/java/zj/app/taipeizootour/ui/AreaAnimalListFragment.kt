@@ -22,7 +22,7 @@ import zj.app.taipeizootour.viewmodel.AreaAnimalListFragmentViewModel
 class AreaAnimalListFragment: Fragment() {
 
     interface OnAnimalSelected {
-        fun onAnimalSelected(itemVb: LayoutZooRecyclerviewItemBinding, plant: ZooAnimal)
+        fun onAnimalSelected(itemVb: LayoutZooRecyclerviewItemBinding, animal: ZooAnimal)
     }
 
     private var _vb: FragmentAreaDataListBinding? = null

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_animal_phylum">門</string>
+    <string name="app_animal_clazz">綱</string>
+    <string name="app_animal_order">目</string>
+    <string name="app_animal_interpretation">解說</string>
+    <string name="app_animal_behavior">生態習性</string>
+    <string name="app_animal_habitat">棲地型態</string>
+    <string name="app_animal_diet">食性</string>
+    <string name="app_animal_feature">型態特徵</string>
+    <string name="app_animal_crisis">面臨問題</string>
+    <string name="app_animal_conservation">保育等級</string>
+    <string name="app_animal_distribution">地理分布</string>
+</resources>

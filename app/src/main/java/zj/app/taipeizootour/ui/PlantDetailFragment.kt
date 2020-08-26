@@ -12,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_plant_detail.*
 import zj.app.taipeizootour.R
-import zj.app.taipeizootour.adapter.PlantPictureAdapter
+import zj.app.taipeizootour.adapter.PictureAdapter
 import zj.app.taipeizootour.databinding.FragmentPlantDetailBinding
 import zj.app.taipeizootour.viewmodel.MainActivityViewModel
 
@@ -23,7 +23,7 @@ class PlantDetailFragment : Fragment() {
     private val vb get() = _vb!!
 
     private val vm: MainActivityViewModel by activityViewModels()
-    private val plantPicsAdapter = PlantPictureAdapter()
+    private val plantPicsAdapter = PictureAdapter()
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,

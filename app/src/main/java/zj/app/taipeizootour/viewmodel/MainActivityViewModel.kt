@@ -10,6 +10,7 @@ import zj.app.taipeizootour.api.data.DataSetMetadata
 import zj.app.taipeizootour.const.Constants
 import zj.app.taipeizootour.db.data.AreaWithAnimals
 import zj.app.taipeizootour.db.data.AreaWithPlants
+import zj.app.taipeizootour.db.model.ZooAnimal
 import zj.app.taipeizootour.db.model.ZooArea
 import zj.app.taipeizootour.db.model.ZooPlant
 import zj.app.taipeizootour.hilt.qualifier.YYYYmmddHHmmssDateFormat
@@ -27,12 +28,14 @@ class MainActivityViewModel @ViewModelInject constructor(
     private val areaWithPlants = MutableLiveData<AreaWithPlants?>()
     private val areaWithAnimals = MutableLiveData<AreaWithAnimals?>()
     private val selectedArea = MutableLiveData<ZooArea?>()
+    private val selectedAnimal = MutableLiveData<ZooAnimal?>()
     private val selectedPlantId = MutableLiveData<ZooPlant?>()
 
     val state = MutableLiveData<ZooAreaState>(ZooAreaState.Loading)
     val areaLiveData = zooRepo.getLiveArea()
     val areaWithPlantsLiveData: LiveData<AreaWithPlants?> = areaWithPlants
     val selectedAreaLiveData: LiveData<ZooArea?> = selectedArea
+    val selectedAnimalLiveData: LiveData<ZooAnimal?> = selectedAnimal
     val selectedPlantIdLiveData: LiveData<ZooPlant?> = selectedPlantId
 
     fun fetchData(areaIntroQuery: String, plantsQuery: String, animalsQuery: String) {
@@ -57,6 +60,10 @@ class MainActivityViewModel @ViewModelInject constructor(
 
     fun selectPlant(plant: ZooPlant) {
         selectedPlantId.value = plant
+    }
+
+    fun selectAnimal(animal: ZooAnimal) {
+        selectedAnimal.value = animal
     }
 
     private suspend fun getNewMeta(query: String, dataTimePrefKey: String): DataSetMetadata? {
