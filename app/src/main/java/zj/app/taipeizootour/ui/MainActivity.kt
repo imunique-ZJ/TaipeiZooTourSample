@@ -5,13 +5,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.transition.Hold
 import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import zj.app.taipeizootour.R
 import zj.app.taipeizootour.const.AnimConstants
+import zj.app.taipeizootour.const.Constants
 import zj.app.taipeizootour.databinding.ActivityMainBinding
 import zj.app.taipeizootour.databinding.LayoutZooRecyclerviewItemBinding
 import zj.app.taipeizootour.db.model.ZooArea
@@ -23,7 +22,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(),
     ZooAreaFragment.OnAreaSelected,
-    ZooAreaDetailFragment.OnPlantSelected {
+    AreaPlantListFragment.OnPlantSelected {
 
     private lateinit var vb: ActivityMainBinding
     private val vm: MainActivityViewModel by viewModels()
@@ -47,17 +46,18 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onAreaSelected(itemVb: LayoutZooRecyclerviewItemBinding, area: ZooArea) {
-        lifecycleScope.launch {
-            vm.fetchAreaPlants(area.areaId)
-            vm.fetchAreaAnimals(area.areaId)
-        }
+        vm.selectArea(area)
         supportFragmentManager.commit {
             supportFragmentManager.findFragmentByTag(areaListTag)?.run {
                 exitTransition = Hold().apply {
                     duration = AnimConstants.SHARED_ELEMENT_DURATION
                 }
             }
-            val detailFragment = ZooAreaDetailFragment()
+            val detailFragment = ZooAreaDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(Constants.ARG_KEY_AREA_ID, area.areaId)
+                }
+            }
             detailFragment.sharedElementEnterTransition = MaterialContainerTransform().apply {
                 duration = AnimConstants.SHARED_ELEMENT_DURATION
                 scrimColor = ContextCompat.getColor(this@MainActivity, android.R.color.white)
@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onPlantSelected(itemVb: LayoutZooRecyclerviewItemBinding, plant: ZooPlant) {
+        vm.selectPlant(plant)
         supportFragmentManager.commit {
             val detailFragment = supportFragmentManager.findFragmentByTag(areaDetailTag)
             detailFragment?.exitTransition = Hold().apply {

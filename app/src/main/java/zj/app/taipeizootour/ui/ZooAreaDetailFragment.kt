@@ -1,8 +1,6 @@
 package zj.app.taipeizootour.ui
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,46 +9,23 @@ import androidx.core.app.SharedElementCallback
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import coil.size.Scale
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import zj.app.taipeizootour.R
-import zj.app.taipeizootour.adapter.ZooPlantsAdapter
+import zj.app.taipeizootour.adapter.AreaDataListPagerAdapter
+import zj.app.taipeizootour.const.Constants
 import zj.app.taipeizootour.databinding.FragmentZooAreaDetailBinding
-import zj.app.taipeizootour.databinding.LayoutZooRecyclerviewItemBinding
-import zj.app.taipeizootour.db.model.ZooPlant
-import zj.app.taipeizootour.ext.dpToPx
 import zj.app.taipeizootour.viewmodel.MainActivityViewModel
 
 @AndroidEntryPoint
 class ZooAreaDetailFragment: Fragment() {
 
-    interface OnPlantSelected {
-        fun onPlantSelected(itemVb: LayoutZooRecyclerviewItemBinding, plant: ZooPlant)
-    }
-
     private var _vb: FragmentZooAreaDetailBinding? = null
     private val vb get() = _vb!!
 
-    private var onPlantSelected: OnPlantSelected? = null
     private val vm: MainActivityViewModel by activityViewModels()
-    private val plantsAdapter by lazy {
-        ZooPlantsAdapter(object: ZooPlantsAdapter.OnPlantClick {
-            override fun onClick(vb: LayoutZooRecyclerviewItemBinding, plant: ZooPlant) {
-                vm.selectPlant(plant)
-                onPlantSelected?.onPlantSelected(vb, plant)
-            }
-        })
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnPlantSelected) {
-            onPlantSelected = context
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -66,25 +41,16 @@ class ZooAreaDetailFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupAppBar()
-        setupRecyclerView()
+        arguments?.getInt(Constants.ARG_KEY_AREA_ID)?.let { areaId ->
+            setupViewPager(areaId)
+        } ?: throw IllegalArgumentException("missing areaId")
+
         bindLiveData()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _vb = null
-    }
-
-    private fun prepareSharedElementTransition() {
-        setEnterSharedElementCallback(
-            object : SharedElementCallback() {
-                override fun onMapSharedElements(
-                    names: List<String?>,
-                    sharedElements: MutableMap<String?, View?>) {
-                    vb.appBar.transitionName = names[0]
-                    sharedElements[names[0]] = vb.appBar
-                }
-            })
     }
 
     private fun setupAppBar() {
@@ -99,29 +65,41 @@ class ZooAreaDetailFragment: Fragment() {
         }
     }
 
-    private fun setupRecyclerView() {
-        vb.rvPlants.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        vb.rvPlants.adapter = plantsAdapter
-        vb.rvPlants.addItemDecoration(SpaceItemDecoration(4.dpToPx()))
+    private fun prepareSharedElementTransition() {
+        setEnterSharedElementCallback(
+            object : SharedElementCallback() {
+                override fun onMapSharedElements(
+                    names: List<String?>,
+                    sharedElements: MutableMap<String?, View?>) {
+                    vb.appBar.transitionName = names[0]
+                    sharedElements[names[0]] = vb.appBar
+                }
+            })
+    }
+
+    private fun setupViewPager(areaId: Int) {
+        vb.pager.adapter = AreaDataListPagerAdapter(this, areaId)
+        TabLayoutMediator(vb.tabLayout, vb.pager) { tab, position ->
+            tab.text = when (position) {
+                0 -> getString(R.string.app_tab_title_plants)
+                1 -> getString(R.string.app_tab_title_animals)
+                else -> ""
+            }
+        }.attach()
     }
 
     private fun bindLiveData() {
-        vm.areaWithPlantsLiveData.observe(viewLifecycleOwner, { areaWithPlants ->
-            vb.collapsingTbLayout.title = areaWithPlants?.area?.name
-            vb.ivPic.load(areaWithPlants?.area?.picUrl) {
+        vm.selectedAreaLiveData.observe(viewLifecycleOwner, { area ->
+            vb.collapsingTbLayout.title = area?.name
+            vb.ivPic.load(area?.picUrl) {
                 placeholder(R.drawable.ic_baseline_pets_24)
                 scale(Scale.FILL)
             }
-            vb.tvDesc.text = areaWithPlants?.area?.info
+            vb.tvDesc.text = area?.info
 
             (view?.parent as? ViewGroup)?.doOnPreDraw {
                 startPostponedEnterTransition()
             }
-
-            plantsAdapter.submitList(areaWithPlants?.plants)
         })
-
-        // TODO("show animal list")
-        vm.areaWithAnimalsLiveData.observe(viewLifecycleOwner, {})
     }
 }
