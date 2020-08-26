@@ -29,14 +29,14 @@ class MainActivityViewModel @ViewModelInject constructor(
     private val areaWithAnimals = MutableLiveData<AreaWithAnimals?>()
     private val selectedArea = MutableLiveData<ZooArea?>()
     private val selectedAnimal = MutableLiveData<ZooAnimal?>()
-    private val selectedPlantId = MutableLiveData<ZooPlant?>()
+    private val selectedPlant = MutableLiveData<ZooPlant?>()
 
     val state = MutableLiveData<ZooAreaState>(ZooAreaState.Loading)
     val areaLiveData = zooRepo.getLiveArea()
     val areaWithPlantsLiveData: LiveData<AreaWithPlants?> = areaWithPlants
     val selectedAreaLiveData: LiveData<ZooArea?> = selectedArea
     val selectedAnimalLiveData: LiveData<ZooAnimal?> = selectedAnimal
-    val selectedPlantIdLiveData: LiveData<ZooPlant?> = selectedPlantId
+    val selectedPlantLiveData: LiveData<ZooPlant?> = selectedPlant
 
     fun fetchData(areaIntroQuery: String, plantsQuery: String, animalsQuery: String) {
         viewModelScope.launch {
@@ -59,7 +59,7 @@ class MainActivityViewModel @ViewModelInject constructor(
     }
 
     fun selectPlant(plant: ZooPlant) {
-        selectedPlantId.value = plant
+        selectedPlant.value = plant
     }
 
     fun selectAnimal(animal: ZooAnimal) {

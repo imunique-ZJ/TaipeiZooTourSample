@@ -81,7 +81,7 @@ class PlantDetailFragment : Fragment() {
 
     @OptIn(ExperimentalStdlibApi::class)
     private fun bindLiveData() {
-        vm.selectedPlantIdLiveData.observe(viewLifecycleOwner, { zooPlant ->
+        vm.selectedPlantLiveData.observe(viewLifecycleOwner, { zooPlant ->
             zooPlant?.let { plant ->
                 val pics = buildList {
                     plant.pic01Url?.takeIf { it.isNotEmpty() }?.let { add(it) }
