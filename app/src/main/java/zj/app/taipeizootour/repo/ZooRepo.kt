@@ -8,6 +8,7 @@ import zj.app.taipeizootour.db.dao.*
 import zj.app.taipeizootour.db.data.AreaWithAnimals
 import zj.app.taipeizootour.db.data.AreaWithPlants
 import zj.app.taipeizootour.db.model.*
+import zj.app.taipeizootour.ext.fullWidthToHalfWidth
 import javax.inject.Inject
 
 class ZooRepo @Inject constructor(
@@ -50,7 +51,7 @@ class ZooRepo @Inject constructor(
                     ZooArea(
                         areaId = id,
                         category = area.category ?: "",
-                        name = area.name ?: "",
+                        name = area.name?.fullWidthToHalfWidth() ?: "",
                         picUrl = area.picUrl ?: "",
                         info = area.info ?: "",
                         memo = area.memo ?: "",
