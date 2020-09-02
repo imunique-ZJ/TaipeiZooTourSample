@@ -28,7 +28,7 @@ android {
 dependencies {
     implementation(fileTree( mapOf("dir" to "libs", "include" to listOf("*.jar")) ))
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${ProjectConfig.kotlinVersion}")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
     implementation("androidx.core:core-ktx:1.3.1")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
