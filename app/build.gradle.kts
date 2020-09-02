@@ -39,7 +39,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.3.1")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.fragment:fragment-ktx:1.2.5")
-    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
     implementation("com.google.android.material:material:1.2.0-rc01")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("io.coil-kt:coil:0.11.0")
