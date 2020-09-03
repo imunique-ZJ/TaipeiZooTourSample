@@ -10,6 +10,7 @@ import org.locationtech.jts.geom.Coordinate
 import org.locationtech.jts.io.WKTReader
 import zj.app.taipeizootour.data.DerivedZooPlant
 import zj.app.taipeizootour.db.model.ZooPlant
+import zj.app.taipeizootour.ext.safeStartActivity
 import javax.inject.Inject
 
 class ZooPlantTransformer @Inject constructor(
@@ -26,8 +27,8 @@ class ZooPlantTransformer @Inject constructor(
         override fun onClick(widget: View) {
             val encodedName = Uri.encode(name)
             val uri = Uri.parse(schemePattern.format(coordinate.y, coordinate.x, encodedName))
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            widget.context.startActivity(intent)
+            val mapIntent = Intent(Intent.ACTION_VIEW, uri).setPackage("com.google.android.apps.maps")
+            widget.context.safeStartActivity(mapIntent)
         }
     }
 
