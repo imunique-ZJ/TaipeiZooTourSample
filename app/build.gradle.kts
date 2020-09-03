@@ -45,6 +45,7 @@ dependencies {
     implementation("io.coil-kt:coil:0.11.0")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("me.relex:circleindicator:2.1.4")
+    implementation(group = "org.locationtech.jts", name ="jts-core" , version = "1.17.1")
 
     implementation("com.google.dagger:hilt-android:2.28.3-alpha")
     kapt("com.google.dagger:hilt-android-compiler:2.28.3-alpha")
