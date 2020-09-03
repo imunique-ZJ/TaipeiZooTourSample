@@ -8,6 +8,7 @@ import androidx.lifecycle.*
 import kotlinx.coroutines.*
 import zj.app.taipeizootour.api.data.DataSetMetadata
 import zj.app.taipeizootour.const.Constants
+import zj.app.taipeizootour.data.DerivedZooAnimal
 import zj.app.taipeizootour.data.DerivedZooPlant
 import zj.app.taipeizootour.data.transformer.IDataTransformer
 import zj.app.taipeizootour.db.data.AreaWithAnimals
@@ -16,6 +17,7 @@ import zj.app.taipeizootour.db.model.ZooAnimal
 import zj.app.taipeizootour.db.model.ZooArea
 import zj.app.taipeizootour.db.model.ZooPlant
 import zj.app.taipeizootour.hilt.qualifier.YYYYmmddHHmmssDateFormat
+import zj.app.taipeizootour.hilt.qualifier.ZooAnimalTransformerQualifier
 import zj.app.taipeizootour.hilt.qualifier.ZooPlantTransformerQualifier
 import zj.app.taipeizootour.repo.IZooRepo
 import zj.app.taipeizootour.state.ZooAreaState
@@ -25,6 +27,7 @@ class MainActivityViewModel @ViewModelInject constructor(
     private val sharedPreference: SharedPreferences,
     @YYYYmmddHHmmssDateFormat private val timeFormat: SimpleDateFormat,
     private val zooRepo: IZooRepo,
+    @ZooAnimalTransformerQualifier private val zooAnimalTransformer: @JvmSuppressWildcards IDataTransformer<ZooAnimal, DerivedZooAnimal>,
     @ZooPlantTransformerQualifier private val zooPlantTransformer: @JvmSuppressWildcards IDataTransformer<ZooPlant, DerivedZooPlant>
 ) : ViewModel() {
 
@@ -39,7 +42,11 @@ class MainActivityViewModel @ViewModelInject constructor(
     val areaLiveData = zooRepo.getLiveArea()
     val areaWithPlantsLiveData: LiveData<AreaWithPlants?> = areaWithPlants
     val selectedAreaLiveData: LiveData<ZooArea?> = selectedArea
-    val selectedAnimalLiveData: LiveData<ZooAnimal?> = selectedAnimal
+    val selectedAnimalLiveData: LiveData<DerivedZooAnimal?> = selectedAnimal.switchMap {
+        liveData {
+            emit(zooAnimalTransformer.transform(it))
+        }
+    }
     val selectedPlantLiveData: LiveData<DerivedZooPlant?> = selectedPlant.switchMap {
         liveData {
             emit(zooPlantTransformer.transform(it))
