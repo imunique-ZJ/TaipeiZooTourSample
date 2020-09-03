@@ -11,8 +11,6 @@ import zj.app.taipeizootour.const.Constants
 import zj.app.taipeizootour.data.DerivedZooAnimal
 import zj.app.taipeizootour.data.DerivedZooPlant
 import zj.app.taipeizootour.data.transformer.IDataTransformer
-import zj.app.taipeizootour.db.data.AreaWithAnimals
-import zj.app.taipeizootour.db.data.AreaWithPlants
 import zj.app.taipeizootour.db.model.ZooAnimal
 import zj.app.taipeizootour.db.model.ZooArea
 import zj.app.taipeizootour.db.model.ZooPlant
@@ -32,15 +30,12 @@ class MainActivityViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private val tagName = javaClass.simpleName
-    private val areaWithPlants = MutableLiveData<AreaWithPlants?>()
-    private val areaWithAnimals = MutableLiveData<AreaWithAnimals?>()
     private val selectedArea = MutableLiveData<ZooArea?>()
     private val selectedAnimal = MutableLiveData<ZooAnimal?>()
     private val selectedPlant = MutableLiveData<ZooPlant?>()
 
     val state = MutableLiveData<ZooAreaState>(ZooAreaState.Loading)
     val areaLiveData = zooRepo.getLiveArea()
-    val areaWithPlantsLiveData: LiveData<AreaWithPlants?> = areaWithPlants
     val selectedAreaLiveData: LiveData<ZooArea?> = selectedArea
     val selectedAnimalLiveData: LiveData<DerivedZooAnimal?> = selectedAnimal.switchMap {
         liveData {
