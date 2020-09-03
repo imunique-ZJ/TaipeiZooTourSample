@@ -1,36 +1,17 @@
 package zj.app.taipeizootour.data.transformer
 
-import android.content.Intent
-import android.net.Uri
 import android.text.SpannableStringBuilder
-import android.text.style.ClickableSpan
-import android.view.View
 import androidx.core.text.inSpans
-import org.locationtech.jts.geom.Coordinate
 import org.locationtech.jts.io.WKTReader
 import zj.app.taipeizootour.data.DerivedZooAnimal
 import zj.app.taipeizootour.db.model.ZooAnimal
-import zj.app.taipeizootour.ext.safeStartActivity
 import javax.inject.Inject
 
 class ZooAnimalTransformer @Inject constructor(
     private val wktReader: WKTReader
 ): IDataTransformer<ZooAnimal, DerivedZooAnimal> {
 
-    private val schemePattern = "geo:%s,%s?q=%s"
     private val locationDelimiter = "；"
-
-    private inner class GeoClickableSpan(
-        private val coordinate: Coordinate,
-        private val name: String
-    ): ClickableSpan() {
-        override fun onClick(widget: View) {
-            val encodedName = Uri.encode(name)
-            val uri = Uri.parse(schemePattern.format(coordinate.y, coordinate.x, encodedName))
-            val mapIntent = Intent(Intent.ACTION_VIEW, uri).setPackage("com.google.android.apps.maps")
-            widget.context.safeStartActivity(mapIntent)
-        }
-    }
 
     override fun transform(data: ZooAnimal?): DerivedZooAnimal? {
         return data?.let { animal ->
