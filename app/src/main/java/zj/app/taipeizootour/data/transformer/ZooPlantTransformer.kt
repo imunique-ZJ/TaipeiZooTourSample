@@ -24,7 +24,8 @@ class ZooPlantTransformer @Inject constructor(
         private val name: String
     ): ClickableSpan() {
         override fun onClick(widget: View) {
-            val uri = Uri.parse(schemePattern.format(coordinate.y, coordinate.x, name))
+            val encodedName = Uri.encode(name)
+            val uri = Uri.parse(schemePattern.format(coordinate.y, coordinate.x, encodedName))
             val intent = Intent(Intent.ACTION_VIEW, uri)
             widget.context.startActivity(intent)
         }
