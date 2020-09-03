@@ -8,11 +8,13 @@ import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import zj.app.taipeizootour.db.ZooDatabase
 import zj.app.taipeizootour.db.dao.*
+import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
 object DatabaseModule {
 
+    @Singleton
     @Provides
     fun provideZooDatabase(@ApplicationContext context: Context): ZooDatabase {
         return ZooDatabase.getDatabase(context)
