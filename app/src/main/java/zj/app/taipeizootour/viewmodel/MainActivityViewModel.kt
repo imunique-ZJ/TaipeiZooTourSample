@@ -8,12 +8,15 @@ import androidx.lifecycle.*
 import kotlinx.coroutines.*
 import zj.app.taipeizootour.api.data.DataSetMetadata
 import zj.app.taipeizootour.const.Constants
+import zj.app.taipeizootour.data.DerivedZooPlant
+import zj.app.taipeizootour.data.transformer.IDataTransformer
 import zj.app.taipeizootour.db.data.AreaWithAnimals
 import zj.app.taipeizootour.db.data.AreaWithPlants
 import zj.app.taipeizootour.db.model.ZooAnimal
 import zj.app.taipeizootour.db.model.ZooArea
 import zj.app.taipeizootour.db.model.ZooPlant
 import zj.app.taipeizootour.hilt.qualifier.YYYYmmddHHmmssDateFormat
+import zj.app.taipeizootour.hilt.qualifier.ZooPlantTransformerQualifier
 import zj.app.taipeizootour.repo.IZooRepo
 import zj.app.taipeizootour.state.ZooAreaState
 import java.text.SimpleDateFormat
@@ -21,7 +24,8 @@ import java.text.SimpleDateFormat
 class MainActivityViewModel @ViewModelInject constructor(
     private val sharedPreference: SharedPreferences,
     @YYYYmmddHHmmssDateFormat private val timeFormat: SimpleDateFormat,
-    private val zooRepo: IZooRepo
+    private val zooRepo: IZooRepo,
+    @ZooPlantTransformerQualifier private val zooPlantTransformer: @JvmSuppressWildcards IDataTransformer<ZooPlant, DerivedZooPlant>
 ) : ViewModel() {
 
     private val tagName = javaClass.simpleName
@@ -36,7 +40,11 @@ class MainActivityViewModel @ViewModelInject constructor(
     val areaWithPlantsLiveData: LiveData<AreaWithPlants?> = areaWithPlants
     val selectedAreaLiveData: LiveData<ZooArea?> = selectedArea
     val selectedAnimalLiveData: LiveData<ZooAnimal?> = selectedAnimal
-    val selectedPlantLiveData: LiveData<ZooPlant?> = selectedPlant
+    val selectedPlantLiveData: LiveData<DerivedZooPlant?> = selectedPlant.switchMap {
+        liveData {
+            emit(zooPlantTransformer.transform(it))
+        }
+    }
 
     fun fetchData(areaIntroQuery: String, plantsQuery: String, animalsQuery: String) {
         viewModelScope.launch {

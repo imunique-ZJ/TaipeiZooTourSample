@@ -1,6 +1,7 @@
 package zj.app.taipeizootour.ui
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -121,7 +122,8 @@ class PlantDetailFragment : Fragment() {
                 vb.layoutFunction.tvContent.text = plant.function
 
                 vb.layoutLocation.tvTitle.text = getString(R.string.app_plant_location)
-                vb.layoutLocation.tvContent.text = plant.location
+                vb.layoutLocation.tvContent.movementMethod = LinkMovementMethod.getInstance()
+                vb.layoutLocation.tvContent.text = plant.geoMapLocation
 
                 vb.tvUpdateDate.text = getString(R.string.app_plant_update_date, plant.updateDate)
             }
