@@ -1,40 +1,25 @@
 package zj.app.taipeizootour.data.transformer
 
-import android.text.SpannableStringBuilder
-import androidx.core.text.inSpans
-import org.locationtech.jts.io.WKTReader
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import zj.app.taipeizootour.data.DerivedZooPlant
 import zj.app.taipeizootour.db.model.ZooPlant
 import javax.inject.Inject
 
 class ZooPlantTransformer @Inject constructor(
-    private val wktReader: WKTReader
+    private val geoReader: IGeoReader,
+    private val geoSpanGenerator: IGeoSpanGenerator
 ): IDataTransformer<ZooPlant, DerivedZooPlant> {
 
     private val locationDelimiter = "；"
 
-    override fun transform(data: ZooPlant?): DerivedZooPlant? {
-        return data?.let { zooPlant ->
-            DerivedZooPlant(zooPlant).apply {
-                val coordinates = try {
-                    wktReader.read(geo)?.coordinates
-                } catch (e: Exception) {
-                    null
+    override suspend fun transform(data: ZooPlant?): DerivedZooPlant? {
+        return withContext(Dispatchers.Default) {
+            data?.let { zooPlant ->
+                DerivedZooPlant(zooPlant).apply {
+                    val coordinates = geoReader.read(geo)
+                    geoMapLocation = geoSpanGenerator.generate(location, locationDelimiter, coordinates)
                 }
-
-                val sb = SpannableStringBuilder()
-                if (coordinates != null) {
-                    val locations = location.split("；")
-                    locations.forEachIndexed { index, loc ->
-                        val coordinate = coordinates[index]
-                        val span = GeoClickableSpan(coordinate, loc)
-                        sb.inSpans(span) { append(loc) }
-                            .append(locationDelimiter)
-                    }
-                } else {
-                    sb.append(location)
-                }
-                geoMapLocation = sb
             }
         }
     }
