@@ -67,7 +67,7 @@ class ZooRepo @Inject constructor(
     override suspend fun fetchPlants(id: String) {
         val plants = mutableListOf<ZooPlant>()
         val areaPlantsCrossRef = mutableListOf<AreaPlantsCrossRef>()
-        api.getPlantsJson(id)?.success?.result?.results?.forEach { plant ->
+        api.getPlantsJson(id)?.success?.result?.results?.distinctBy { it.latinName }?.forEach { plant ->
             val zooPlantEntity = ZooPlant(
                 plantId = plant.id,
                 latinName = plant.latinName,
@@ -107,7 +107,7 @@ class ZooRepo @Inject constructor(
     override suspend fun fetchAnimals(id: String) {
         val animals = mutableListOf<ZooAnimal>()
         val areaAnimalsCrossRef = mutableListOf<AreaAnimalsCrossRef>()
-        api.getAnimalsJson(id)?.success?.result?.results?.forEach { animal ->
+        api.getAnimalsJson(id)?.success?.result?.results?.distinctBy { it.latinName }?.forEach { animal ->
             val zooAnimalEntity = ZooAnimal(
                 animalId = animal.id,
                 code = animal.code,
